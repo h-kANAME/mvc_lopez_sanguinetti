@@ -7,4 +7,4 @@ _Conexión a base de datos_
 ## Alumnos
 
 * **Emmanuel Lopez**
-* * **Ramiro Sanguinetti**
+* **Ramiro Sanguinetti**
