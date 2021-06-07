@@ -12,25 +12,64 @@
     <div class="row">
       <div class="col">
 
-        <a href="listadoProductos.php?columna=nombre&tipo=asc"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>
+        <a href="productos?tipo=asc"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>
         <span style="margin-left: 10px;"></span>
-        <a href="listadoProductos.php?columna=nombre&tipo=desc"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>
+        <a href="productos?tipo=desc"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>
 
       </div>
     </div>
   </div>
 
   <div class="container">
+	<div class="row">
+		<div class="col md-12 my-4 ">
+			<?php
+        foreach ($this->categorias as $row) {
+          $categoria = new Categoria();
+          $categoria = $row;
+  
+          if ($categoria) {
+            echo '<div class="list-group">';   
+            echo '<a href="#" class="list-group-item list-group-item-action list-group-item-light">' . $categoria->nombre . '</a>';
+            echo '</div>';
+          }
+        }
+			?>
+		</div>
+
+    <div class="col md-12 my-4 ">
+			<?php
+        foreach ($this->marcas as $row) {
+          $marca = new Marca();
+          $marca = $row;
+  
+          if ($marca) {
+            echo '<div class="list-group">';   
+            echo '<a href="#" class="list-group-item list-group-item-action list-group-item-light">' . $marca->nombre . '</a>';
+            echo '</div>';
+          }
+        }
+			?>
+		</div>  
+
+	</div>
+</div>
+
+
+  <div class="container">
     <div class="row">
 
       <?php
+      
+   
+
       include_once "models/ProductosModelo.php";
       foreach ($this->productos as $row) {
         $producto = new Productos();
         $producto = $row;
 
         if ($producto) {
-
+    
           echo '<div class="col-md-4 card-body">';
           echo '<div class="card" style="width: 20rem;">';
           echo '<div class="card text-center">';
@@ -59,12 +98,14 @@
   </div>
 
 
+
   <?php require 'views/footer.php'; ?>
 
 </body>
 
 
 <?php
+
 echo '<div class="col-md-4 card-body">';
 echo '<div class="card" style="width: 17rem;">';
 echo '<div class="card text-center">';
