@@ -2,6 +2,7 @@
 include_once 'models/Producto.php';
 include_once "models/Categoria.php";
 include_once "models/Marca.php";
+include_once 'models/SubCategoria.php';
 
 class ProductosModelo extends Model
 {
@@ -15,11 +16,14 @@ class ProductosModelo extends Model
 
     public function getProductos(){
 
-      if (isset($_REQUEST['tipo'])) {
-        $ordenBy = $_REQUEST['tipo'];
+      
+      if (isset($_REQUEST['ordenBy'])) {
+        $ordenBy = $_REQUEST['ordenBy'];
       } else {
         $ordenBy = '';
       }
+
+   
 
         $productos = [];
         try {
@@ -93,9 +97,11 @@ class ProductosModelo extends Model
         }
       }
 
+      
       public function getMarcas(){
 
 
+     
         if (isset($_REQUEST['id_marca'])) {
           $id_marca = $_REQUEST['id_marca'];
         } else {
@@ -134,7 +140,31 @@ class ProductosModelo extends Model
           return [];
         }
       }
+
+      public function getSubCategorias(){
+        
+        
     
+        $subCategorias = [];
+        try {
+          $query  = "SELECT * FROM `sub_categorias` WHERE estado_activo = 1";
+          $con    = $this->db->connect();
+          $con    = $con->query($query);
+    
+          while ($row = $con->fetch()) {
+    
+            $subCategoria = new SubCategoria();
+    
+            $subCategoria->id_sub_categoria         = $row['id_sub_categoria'];
+            $subCategoria->nombre               = $row['nombre'];
+            $subCategoria->estado_activo        = $row['estado_activo'];
+            array_push($subCategorias, $subCategoria);
+          }
+          return $subCategorias;
+        } catch (PDOException $e) {
+          return [];
+        }
+      }
 
 }
 ?>

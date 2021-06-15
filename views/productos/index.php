@@ -5,124 +5,123 @@
   <title>Productos</title>
 </head>
 
+
+
 <body class="backdark">
-  <?php require 'views/header.php'; ?>
+  <?php require 'views/header.php';
+  $PAGINA_LISTADO = 'productos';
 
-  <div class="container my-5">
+
+  if (isset($_REQUEST['id_marca'])) {
+    $id_marca = $_REQUEST['id_marca'];
+  } else {
+    $id_marca = '';
+  }
+
+  if (isset($_REQUEST['id_categoria'])) {
+    $id_categoria = $_REQUEST['id_categoria'];
+  } else {
+    $id_categoria = '';
+  }
+
+  if (isset($_REQUEST['id_orden'])) {
+    $id_orden = $_REQUEST['id_orden'];
+  } else {
+    $id_orden = '';
+  }
+
+  ?>
+
+
+  <div class="container my-6">
     <div class="row">
-      <div class="col">
 
-        <a href="productos?tipo=asc"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>
-        <span style="margin-left: 10px;"></span>
-        <a href="productos?tipo=desc"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>
+
+      <div class="col-lg-5">
+          <form action="">
+            <div class="list-group lista-filtros" data-categoria=<?php echo '"' . $id_categoria . '"' ?> data-marca=<?php echo '"' . $id_marca . '"' ?>>
+              <?php
+              echo ' <h3 class="">  <a class="filtro-categorias"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';
+              // foreach ($marcas as $marca) {
+              foreach ($this->marcas as $row) {
+                $marca = new Marca();
+                $marca = $row;
+                echo '<a class="" href="' . $PAGINA_LISTADO . '?id_marca=' . $marca->id_marca . '&id_categoria=' . $id_categoria . '&id_orden=' . $id_orden . '">';
+                echo ' <button data-id="' . $marca->nombre . '" type="button" data-filtro="marca"  class="list-group-item list-group-item-action marca ">
+             ' . $marca->nombre . '
+             </button>';
+                echo '</a>';
+              }
+              echo '</div>';
+              echo '</div>';
+              echo  '<div class="col-lg-5 mx-auto">';
+              echo ' <h3 class="mx-auto ">  <a class="filtro-categorias" data-id="categoria"  href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=">Categorias</a> </h3>';
+              foreach ($this->categorias as $row) {
+                $categoria = new Categoria();
+                $categoria = $row;
+                echo '<a class="" href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $categoria->id_categoria .  '&id_orden=' . $id_orden . '">';
+                echo ' <button type="button" data-id="' . $categoria->nombre . '" data-filtro="categoria"  class="list-group-item list-group-item-action  categoria ">
+                ' . $categoria->nombre . '
+              </button>';
+                echo '</a>';
+              }
+              ?>
+              </div>';
+          </form>
+        
+        <div class="mt-5">  
+        <?php
+        
+        echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=asc' . '"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>';
+        echo '<span style="margin-left: 10px;"></span>';
+        echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=desc' . '"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>';
+        ?>
+      </div>
+      
+    </div>
+    <div class="container">
+      <div class="row">
+
+        <?php
+        include_once "models/ProductosModelo.php";
+
+        foreach ($this->productos as $row) {
+          $producto = new Productos();
+          $producto = $row;
+          if (($producto->id_marca == $id_marca || $id_marca == '')
+            && ($producto->id_categoria == $id_categoria || $id_categoria == '')
+          ) {
+
+            echo '<div class="col-md-4 card-body">';
+            echo '<div class="card" style="width: 20rem;">';
+            echo '<div class="card text-center">';
+
+            echo '<img src="' . $producto->imagen . '" class="card-img-top img-fluid"  alt="' . $producto->modelo . '">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $producto->modelo . '</h5>';
+
+            echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
+            echo '</div>'; //Cry
+
+            echo '<div class="btn-group">';
+            echo '<a href="producto_modelo.php?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
+
+            echo '</div>'; // Card body
+            echo '</div>'; // Style width 20
+
+            echo '</div>';
+            echo '</div>';
+          }
+        }
+        ?>
+
 
       </div>
     </div>
-  </div>
 
-  <div class="container">
-	<div class="row">
-		<div class="col md-12 my-4 ">
-			<?php
-        foreach ($this->categorias as $row) {
-          $categoria = new Categoria();
-          $categoria = $row;
-  
-          if ($categoria) {
-            echo '<div class="list-group">';   
-            echo '<a href="#" class="list-group-item list-group-item-action list-group-item-light">' . $categoria->nombre . '</a>';
-            echo '</div>';
-          }
-        }
-			?>
-		</div>
-
-    <div class="col md-12 my-4 ">
-			<?php
-        foreach ($this->marcas as $row) {
-          $marca = new Marca();
-          $marca = $row;
-  
-          if ($marca) {
-            echo '<div class="list-group">';   
-            echo '<a href="#" class="list-group-item list-group-item-action list-group-item-light">' . $marca->nombre . '</a>';
-            echo '</div>';
-          }
-        }
-			?>
-		</div>  
-
-	</div>
-</div>
-
-
-  <div class="container">
-    <div class="row">
+    <php>
 
       <?php
-      
-   
-
-      include_once "models/ProductosModelo.php";
-      foreach ($this->productos as $row) {
-        $producto = new Productos();
-        $producto = $row;
-
-        if ($producto) {
-    
-          echo '<div class="col-md-4 card-body">';
-          echo '<div class="card" style="width: 20rem;">';
-          echo '<div class="card text-center">';
-
-          echo '<img src="' . $producto->imagen . '" class="card-img-top img-fluid"  alt="' . $producto->modelo . '">';
-          echo '<div class="card-body">';
-          echo '<h5 class="card-title">' . $producto->modelo . '</h5>';
-
-          echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
-          echo '</div>'; //Cry
-
-          echo '<div class="btn-group">';
-          echo '<a href="producto_modelo.php?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
-
-          echo '</div>'; // Card body
-          echo '</div>'; // Style width 20
-
-          echo '</div>';
-          echo '</div>';
-        }
-      }
-      ?>
-
-
-    </div>
-  </div>
-
-
-
-  <?php require 'views/footer.php'; ?>
+      require 'views/footer.php'; ?>
 
 </body>
-
-
-<?php
-
-echo '<div class="col-md-4 card-body">';
-echo '<div class="card" style="width: 17rem;">';
-echo '<div class="card text-center">';
-
-echo '<img src="' . $producto->imagen . '" class="card-img-top"  alt="' .  $producto->modelo . '">';
-echo '<div class="card-body">';
-echo '<h5 class="card-title">' .  $producto->modelo . '</h5>';
-
-echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
-echo '</div>'; //Cry
-
-echo '<div class="btn-group">';
-echo '<a href="producto_modelo.php?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
-
-echo '</div>'; // Card body
-echo '</div>'; // Style width 20
-
-echo '</div>';
-echo '</div>';
-?>
