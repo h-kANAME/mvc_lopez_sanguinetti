@@ -7,14 +7,12 @@
 
 <body class="backdark">
 
-    <?php require 'views/header.php'; ?>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col 12">
-                <h1 class="text-white py-4">Contacto</h1>
-            </div>
-        </div>
-    </div> -->
+    <?php
+    require 'views/header.php';
+    require 'views/admin/inc/con_db.php';
+    $query = "SELECT * FROM contacto";
+    $respuesta = $connect->query($query);
+    ?>
 
     <div class="container my-5">
         <div class="row">
