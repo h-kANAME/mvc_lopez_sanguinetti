@@ -1,0 +1,28 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.backdark{
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    background-color: rgb(48, 48, 48);
+}
+
+#footer{
+    background-color: grey;
+    color: #fff;
+    font-weight: bold;
+    bottom:0px;
+    padding: 10px;
+}
+    
+.error{
+    color:#f00;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+.activo{
+	font-weight: bold;
+}
+

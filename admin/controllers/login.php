@@ -1,12 +1,16 @@
 <?php
 
-class Admin extends Controller{
+class Login extends Controller{
     function __construct(){
         parent::__construct();
         $this->view->mensaje = '';
     }
     
     function render(){
-       $this->view->render('admin/login');
+      $this->view->render('login/index');
     }
+
 }
+
+
+?>

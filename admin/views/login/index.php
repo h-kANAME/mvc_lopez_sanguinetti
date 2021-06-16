@@ -27,7 +27,7 @@
         <div class="col-lg-8 offset-lg-2 col-md-12 offset-md-6 col-12">
             <h1 class="text-white">Iniciar Sesion</h1>         
 
-            <form action='<?php echo constant('URL'); ?>usuarios/obtenerDatosPost' method="post" class="my-5">
+            <form action='<?php echo constant('URL'); ?>/usuarios/obtenerDatosPost' method="post" class="my-5">
             <div class="error"><?php echo $this->mensaje ?></div></br>
 
                 <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value=""></p>

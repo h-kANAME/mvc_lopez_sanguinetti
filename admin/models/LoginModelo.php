@@ -1,5 +1,5 @@
 <?php
-class AdminInicioModelo extends Model
+class LoginModelo extends Model
 {
 
     public function __construct(){
