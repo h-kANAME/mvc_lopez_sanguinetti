@@ -30,12 +30,6 @@
                             <a class="nav-link text-white" href="<?= constant('URL')?>productos">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL') ?>nuevo">Nuevo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL') ?>consulta">Consulta</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-white" href="<?= constant('URL')?>contacto">Contacto</a>
                         </li>
                     </ul>

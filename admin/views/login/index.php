@@ -25,16 +25,18 @@
     <div class="container my-5">
 
         <div class="col-lg-8 offset-lg-2 col-md-12 offset-md-6 col-12">
-            <h1 class="text-white">Iniciar Sesion</h1>         
+            <h1 class="text-white">Iniciar Sesion</h1>
 
-            <form action='<?php echo constant('URL'); ?>/usuarios/obtenerDatosPost' method="post" class="my-5">
-            <div class="error"><?php echo $this->mensaje ?></div></br>
-
-                <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value=""></p>
-                <p><input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" value=""></p>
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
-
+            <form action='<?php echo constant('URL'); ?>login/obtenerDatosPost' method="post" class="my-5">
+                <div class="error"><?php echo $this->mensaje ?></div></br>
+                
+                <div class="form-group">
+                    <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="<?php echo isset($usuario->usuario) ? $usuario->usuario : ''; ?>">
+                    <p><input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" value=""></p>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Ingresar</button>
+                </div>
                 <div class="container">
                     <div class="row">
                         <span class="card-body text-left"><a href="#">Olvide mi Clave</a></span>

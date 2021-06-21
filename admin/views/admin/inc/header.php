@@ -1,11 +1,15 @@
 <?php
-session_start();
+// if(isset($_POST['login'])){
+// 	$user->login($_POST);
+// }
 
-// echo '<pre>';
-// var_dump($_SESSION);
-// echo '</pre>';
-
-
+// if(isset($_GET['logout'])){
+//     unset($_SESSION['usuario']); 
+// }
+	 
+// if($user->notLogged()){
+//     header("location:../admin");
+// }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,23 +26,15 @@ session_start();
     <header>
         <nav class="navbar navbar-expand-md bg-dark">
             <div class="container ml-6 px-5">
-                <a class="navbar-brand text-white" href="<?= constant('URL') ?>admin"><img src="public/img/Logos_Banners/adm.png" alt="" width="270" height="80"></a>
+                <a class="navbar-brand text-white" href="<?= constant('URL') ?>login"><img src="public/img/Logos_Banners/adm.png" alt="" width="270" height="80"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse md-pt-4 mdx-5 lg-pt-1 sm-pt-5" id="navbarNavDropdown">
                     <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL')?>adminInicio">Productos</a>
-                        </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL') ?>adminInicio">Comentarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL') ?>adminInicio">Rotulos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= constant('URL')?>admin">Salir</a>
+                            <a class="nav-link text-white" href="<?= constant('URL')?>login">Salir</a>
                         </li>
                     </ul>
                 </div>
