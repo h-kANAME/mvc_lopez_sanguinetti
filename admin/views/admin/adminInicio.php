@@ -1,6 +1,6 @@
 <?php
 include_once('inc/header.php');
-session_start();
+
 ?>
 <title>Aministrador de Sitio</title>
 
@@ -9,7 +9,7 @@ session_start();
     <div class="container my-3">
         <div class="row">
             <div class="col text-center">
-                <h5 class="text-right text-white">Bienvenido <?php echo $_SESSION['usuario']; ?></h5>
+                <h5 class="text-right text-white">Bienvenido:  <?php echo $_SESSION['nombre'];?></h5>
             </div>
         </div>
     </div>

@@ -1,4 +1,9 @@
 <?php
+$usuario = json_decode(file_get_contents('usuario.json') , true);
+session_start();
+$_SESSION['nombre'] =$usuario['nombre'];
+$_SESSION['clave'] = $usuario['clave'];
+
 // if(isset($_POST['login'])){
 // 	$user->login($_POST);
 // }

@@ -13,20 +13,28 @@ class LoginModelo extends Model
     public function validacionUsuario($datos)
 
     {
+        
+
         $usuario = $datos['usuario'];
         $clave = $datos['clave'];
 
-        $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND salt = '$clave'";
+        $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
         $con = $this->db->connect();
         $datos = $con->query($query);
 
         foreach ($datos as $prueba) {
+
+            file_put_contents('usuario.json', json_encode($prueba));
+          
+
             echo 'Usuario: ' . $prueba['usuario'] = $usuario . '<br>';
             echo 'Clave: ' . $prueba['salt'];
 
             if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
-
+               
+               
                 header("location:../adminInicio");
+                
             } else {
                 header("location:../login");
             }
