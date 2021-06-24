@@ -23,22 +23,17 @@ class Login extends Controller
       'clave'          => $_POST['clave'],
 
     );
-?>
-    <p class="text-white"><?php echo 'Usuario: ' . $_POST['usuario']; ?></p>
-    <p class="text-white"><?php echo 'Clave: ' . $_POST['clave']; ?></p>
-    <?php
-
 
     $credencialesPost = $this->modelo->validacionUsuario($datos);
     $mensaje = '';
-    if (!$credencialesPost) {
+    if (!$credencialesPost) {      
       $mensaje = "El usuario no se pudo identificar";
+      $this->view->render('login/index');
     } else {
-      //         $mensaje = "Usuario identificado"; 
-
+      $mensaje = "Usuario identificado";
+      $this->render();
     }
     $this->view->mensaje = $mensaje;
-    $this->render();
   }
 
   function userAdd()
@@ -59,8 +54,7 @@ class Login extends Controller
     if (!$altaUsuario) {
       $mensaje = "El usuario no se pudo dar de alta";
     } else {
-               $mensaje = "Usuario creado"; 
-
+      $mensaje = "Usuario creado";
     }
     $this->view->mensaje = $mensaje;
     $this->render();

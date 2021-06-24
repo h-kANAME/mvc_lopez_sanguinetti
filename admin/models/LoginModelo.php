@@ -11,9 +11,7 @@ class LoginModelo extends Model
 
     //Identidico si el usuario existe
     public function validacionUsuario($datos)
-
     {
-        
 
         $usuario = $datos['usuario'];
         $clave = $datos['clave'];
@@ -24,19 +22,32 @@ class LoginModelo extends Model
 
         foreach ($datos as $prueba) {
 
-            file_put_contents('usuario.json', json_encode($prueba));
-          
-
-            echo 'Usuario: ' . $prueba['usuario'] = $usuario . '<br>';
-            echo 'Clave: ' . $prueba['salt'];
-
             if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
-               
-               
-                header("location:../adminInicio");
-                
+
+                session_start();
+                $_SESSION['usuario'] = $usuario;
+
+                $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo
+                          FROM usuarios u, usuarios_visibilidad v, visibilidad c
+                          WHERE u.id_usuario = v.id_usuario
+                          AND c.id_visibilidad = v.id_visibilidad
+                          AND u.id_usuario = " . $prueba['id_usuario'];
+
+                $permisos = $con->query($query);
+
+                foreach ($permisos as $codigos) {
+
+                    $permisos = $codigos['Codigo'];
+                }
+
+                $_SESSION['permisos'] = $permisos;
+
+                echo  $_SESSION['usuario'] . '<br>';
+                echo  $_SESSION['permisos'];
+
+                return true;
             } else {
-                header("location:../login");
+                return false;
             }
         }
     }

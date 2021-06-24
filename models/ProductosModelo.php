@@ -165,6 +165,11 @@ class ProductosModelo extends Model
           return [];
         }
       }
-
+      
+      public function ranqueoProductos() {
+        $query = "SELECT productos.modelo AS Producto, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
+        FROM productos, comentarios
+        WHERE productos.id_producto = comentarios.id_producto
+        GROUP BY productos.modelo ";
+      }
 }
-?>
