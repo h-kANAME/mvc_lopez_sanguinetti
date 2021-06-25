@@ -21,6 +21,12 @@
     $id_categoria = '';
   }
 
+  if (isset($_REQUEST['id_sub_categoria'])) {
+    $id_sub_categoria = $_REQUEST['id_sub_categoria'];
+  } else {
+    $id_sub_categoria = '';
+  }
+
   if (isset($_REQUEST['id_orden'])) {
     $id_orden = $_REQUEST['id_orden'];
   } else {
@@ -37,8 +43,7 @@
           <div class="list-group lista-filtros" data-categoria=<?php echo '"' . $id_categoria . '"' ?> data-marca=<?php echo '"' . $id_marca . '"' ?>>
 
             <?php
-            echo ' <h3 class="">  <a class="filtro-categorias"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';
-            // foreach ($marcas as $marca) {
+            echo ' <h3 class="">  <a class="filtro-categorias"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';           
             foreach ($this->marcas as $row) {
               $marca = new Marca();
               $marca = $row;
@@ -61,8 +66,23 @@
               </button>';
               echo '</a>';
             }
+
+
+            
+            echo ' <h3 class="">  <a class="filtro-categorias"  data-id="sub_categoria"  href="' . $PAGINA_LISTADO . '?id_sub_categoria=&id_sub_categoria=' . $id_sub_categoria . '">Sub Categoria</a> </h3>';           
+            foreach ($this->subCategorias as $row) {
+              $subCategoria = new SubCategoria();
+              $subCategoria = $row;
+              echo '<a class="" href="' . $PAGINA_LISTADO . '?id_sub_categoria=' . $id_sub_categoria . '&id_sub_categoria=' . $subCategoria->id_sub_categoria . '&id_orden=' . $id_orden . '">';
+              echo ' <button data-id="' . $subCategoria->nombre . '" type="button" data-filtro="sub_categoria"  class="list-group-item list-group-item-action sub_categoria ">
+             ' . $subCategoria->nombre . '
+             </button>';
+              echo '</a>';
+            }
+
+
             ?>
-          </div>';
+          </div>
         </form>
 
         <div class="mt-5">
@@ -81,12 +101,31 @@
           <?php
           include_once "models/ProductosModelo.php";
 
+
+
           foreach ($this->productos as $row) {
+
+
+
             $producto = new Productos();
             $producto = $row;
             if (($producto->id_marca == $id_marca || $id_marca == '')
               && ($producto->id_categoria == $id_categoria || $id_categoria == '')
             ) {
+
+              foreach ($this->ranqueos as $ranq){
+
+                $ranqueo = new Ranqueo();
+                $ranqueo = $ranq;
+
+                // echo 'Producto: ' . $ranqueo->producto . '<br>';
+                 //echo 'Valoracion: ' . $ranqueo->calificacion . '<br>';
+                }
+              
+
+               if($ranqueo->calificacion == 5){
+                 $ranqueo->calificacion = '★';
+               }
 
               echo '<div class="col-md-4 card-body">';
               echo '<div class="card" style="width: 20rem;">';
@@ -97,6 +136,9 @@
               echo '<h5 class="card-title">' . $producto->modelo . '</h5>';
 
               echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
+
+              echo '<h6 class="card-text">' . 'Valoracion: ' . $ranqueo->calificacion . '</h6>';
+
               echo '</div>'; //Cry
 
               echo '<div class="btn-group">';
@@ -107,8 +149,13 @@
 
               echo '</div>';
               echo '</div>';
-            }
-          }
+              
+            } 
+             
+          
+        }
+      
+      
           ?>
 
         </div>
