@@ -45,9 +45,9 @@ class LoginModelo extends Model
                 echo  $_SESSION['usuario'] . '<br>';
                 echo  $_SESSION['permisos'];
 
-                return true;
+             //   return true;
             } else {
-                return false;
+             //   return false;
             }
         }
     }

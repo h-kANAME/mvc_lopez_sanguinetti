@@ -2,9 +2,9 @@
 include_once ('inc/sidebar.php');
 
 
- if(isset($_POST['validacionUsuario'])){
- 	$datos->validacionUsuario($_POST);
- }
+//  if(isset($_POST['validacionUsuario'])){
+//  	$datos->validacionUsuario($_POST);
+//  }
 
  if(isset($_GET['logout'])){
      unset($_SESSION['usuario']); 

@@ -1,5 +1,4 @@
 <?php
-include_once('inc/con_db.php');
 $titulo = 'KYZ - Mensaje Enviado';
 
 use PHPMailer\PHPMailer\PHPMailer;

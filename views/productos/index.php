@@ -105,8 +105,6 @@
 
           foreach ($this->productos as $row) {
 
-
-
             $producto = new Productos();
             $producto = $row;
             if (($producto->id_marca == $id_marca || $id_marca == '')
@@ -154,8 +152,7 @@
              
           
         }
-      
-      
+           
           ?>
 
         </div>

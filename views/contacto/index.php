@@ -9,9 +9,6 @@
 
     <?php
     require 'views/header.php';
-    require 'views/admin/inc/con_db.php';
-    $query = "SELECT * FROM contacto";
-    $respuesta = $connect->query($query);
     ?>
 
     <div class="container my-5">
@@ -55,8 +52,17 @@
                         <select name="area" class="mdb-select md-form">
                             <option value="0" selected>Área que desea contactar</option> <!-- fixed eliminando "disabled" -->
                             <?php
-                            foreach ($respuesta as $contactos) {
-                                echo '<option value="' . $contactos['id_sector'] . '">' . $contactos['nombre_sector'] . '</option>';
+                            include_once "models/ContactoModelo.php";
+                            foreach ($this->contactos as $row) {
+                                 $contacto = new Contacto();
+                                 $contacto = $row;
+                                //echo $row['id_contacto'] . '<br/>';
+                                // echo '<option value="' . $row['id_sector'] . '">' . $row['id_nombre'] . '</option>';
+                            
+                            ?>
+                               <option value="<?php echo $contacto->id_sector ?>"><?php echo $contacto->nombre_sector ?></option>
+                            <?php
+                        
                             }
                             ?>
                         </select>
