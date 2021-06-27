@@ -34,35 +34,32 @@
     <div class="container py-3">
         <div class="row">
             <div class="col-md-9 mb-md-0 mb-5">
-                <form method="POST" action="envios.php" enctype="multipart/form-data">
+                <form method="POST" action='<?php echo constant('URL'); ?>contacto/obtenerDatosCorreo' enctype="multipart/form-data">
                     <div class="form-group">
-                        <input name="nombre" type="text" class="form-control" placeholder="Nombre">
+                        <input name="nombre" type="text" class="form-control" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <input name="apellido" type="text" class="form-control" placeholder="Apellido">
+                        <input name="apellido" type="text" class="form-control" placeholder="Apellido" required>
                     </div>
                     <div class="form-group">
-                        <input name="telefono" type="text" class="form-control" placeholder="Teléfono">
+                        <input name="telefono" type="text" class="form-control" placeholder="Teléfono" required>
                     </div>
                     <div class="form-group">
-                        <input name="correo" type="email" class="form-control" placeholder="Correo electrónico">
+                        <input name="correo" type="email" class="form-control" placeholder="Correo electrónico" required>
                     </div>
                     <div class="form-group">
 
-                        <select name="area" class="mdb-select md-form">
+                        <select name="area" class="mdb-select md-form" required>
                             <option value="0" selected>Área que desea contactar</option> <!-- fixed eliminando "disabled" -->
                             <?php
                             include_once "models/ContactoModelo.php";
                             foreach ($this->contactos as $row) {
-                                 $contacto = new Contacto();
-                                 $contacto = $row;
-                                //echo $row['id_contacto'] . '<br/>';
-                                // echo '<option value="' . $row['id_sector'] . '">' . $row['id_nombre'] . '</option>';
-                            
+                                $contacto = new Contacto();
+                                $contacto = $row;
                             ?>
-                               <option value="<?php echo $contacto->id_sector ?>"><?php echo $contacto->nombre_sector ?></option>
+                                <option value="<?php echo $contacto->id_sector ?>"><?php echo $contacto->nombre_sector ?></option>
                             <?php
-                        
+
                             }
                             ?>
                         </select>
@@ -71,13 +68,18 @@
                     <div class="form-group">
                         <textarea placeholder="Escribe Mensaje" class="form-control" name="mensaje" id="mensaje" cols="30" rows="5"></textarea>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <input type="file" id="archivo" name="archivo">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <button class="btn btn-lg btn-primary" type="submit">Enviar</button>
                     </div>
                 </form>
+
+
+                <div class="text-center"><h5 class="text-white"><?php echo $this->msjPantalla ?></h5></div>
+
+
             </div>
         </div>
     </div>

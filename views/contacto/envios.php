@@ -4,24 +4,6 @@ $titulo = 'KYZ - Mensaje Enviado';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$_FILES['archivo'];
-$nombre = $_FILES['archivo']['name'];
-$guardado = $_FILES['archivo']['tmp_name'];
-
-if ($connect) {
-	$query = "SELECT * FROM contacto WHERE id_sector = $area";
-	$resultado = $connect->query($query);
-}
-
-foreach ($resultado as $rowSector) {
-}
-
-if (file_exists('contactos')) {
-	move_uploaded_file($guardado, 'contacto/adjuntos/' . $nombre . $_POST['correo'] . '.jpg');
-} else {
-	die();
-}
-
 require_once('PHPMailer\src\PHPMailer.php');
 require_once('PHPMailer\src\Exception.php');
 require_once('PHPMailer\src\SMTP.php');
@@ -35,10 +17,9 @@ $mail->Port = 587;
 $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 $mail->Username = "luis.lopez@davinci.edu.ar";
-$mail->Password = '123';
+$mail->Password = '';
 $mail->SetFrom('luis.lopez@davinci.edu.ar', 'Emmanuel Lopez');
 $mail->addAddress($_POST["correo"]); //Remitente
-$mail->addBCC($rowSector['mail_sector']);
 $mail->isHTML(true);
 $sector = $_POST['area'];
 
@@ -60,37 +41,32 @@ $mail->Body = '<h1 align=left>Sus comentarios fueron recibidos con exito</h1> ' 
 	'<br><li>Apellido: ' . $_POST['apellido'] . '</li>' .
 	'<br><li>Mail: ' . $_POST['correo'] . '</li>' .
 	'<br><li>Telefono: ' . $_POST['telefono'] . '</li>' .
-	'<br><li>Area que desea contactar : ' . $rowSector['nombre_sector'] . '</li>' .
+	'<br><li>Area que desea contactar : ' . $sector . '</li>' .
 	'</ul></h3>' .
 	'<br><h2>Su mensaje fue: </h2>' .
 	'<br><h4>' . $_POST['mensaje'] . '</h4>';
 
+$msjPantalla = '';	
+
 if (!$mail->Send()) {
+	$msjPantalla = 'No se pudo enviar el mensaje';
 	$titulo = 'ERROR - No se pudo enviar Mensaje';
-	include_once('header.php');
 	$alerta = 'No se pudo enviar mensaje';
 	$mensaje = 'No se pudo enviar el correo electronico';
 	$error = 'Error: ';
+	$this->view->msjPantalla = $msjPantalla;
+	//header("location:" .  constant('URL') . "contacto");
+	
+	//$this->view->msjPantalla = $msjPantalla;
+   // $this->render();
 } else {
-	include_once('header.php');
+	$msjPantalla = 'Mensaje enviado con exito';
 	$alerta = 'Mensaje enviado';
 	$mensaje = 'Mensaje enviado con éxito, ahora podes seguir navegando tus productos favoritos!';
 	$error = ' ';
+	$this->view->msjPantalla = $msjPantalla;
+	//$this->view->render('contacto/index');
 }
-?>
 
-<body>
-	<div class="container">
-		<div class="alert-link">
-			<script>
-				alert("<?php echo $alerta ?>");
-			</script>
-		</div>
-
-		<div class="alert alert-dark alert-dismissible fade show my-5 text-center" role="alert">
-			<strong><?php echo $mensaje . '<br>' . $error . $mail->ErrorInfo ?>
-				</button>
-		</div>
-
-	</div>
-</body>
+    $this->view->msjPantalla = $msjPantalla;
+    $this->render();

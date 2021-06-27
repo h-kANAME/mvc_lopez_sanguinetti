@@ -34,4 +34,5 @@ class ContactoModelo extends Model
             return [];
         }
     }
+
 }
