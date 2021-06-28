@@ -75,7 +75,7 @@ require 'views/header.php';
                 <h5 class="card-title"><?php echo $destacado->modelo ?></h5>
                 <p class="card-text"><?php echo 'ARS ' . $destacado->precio ?></p>
               </div>
-              <a href="producto_modelo.php?id_producto=<?php echo $destacado->id_producto?>" class="btn btn-primary">Detalles</a>
+              <a href="producto_modelo?id_producto=<?php echo $destacado->id_producto?>" class="btn btn-primary">Detalles</a>
             </div>
 
           <?php } ?>
