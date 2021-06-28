@@ -1,5 +1,5 @@
 <?php
-include_once ('inc/sidebar.php');
+//include_once ('inc/sidebar.php');
 
 
 //  if(isset($_POST['validacionUsuario'])){
@@ -10,9 +10,9 @@ include_once ('inc/sidebar.php');
      unset($_SESSION['usuario']); 
  }
 	 
- if($datos->notLogged()){
-     header("location:../admin");
- }
+//  if($datos->notLogged()){
+//      header("location:../admin");
+//  }
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,6 +1,5 @@
 <?php
 include_once('inc/header.php');
-
 ?>
 <title>Aministrador de Sitio</title>
 
@@ -9,7 +8,7 @@ include_once('inc/header.php');
     <div class="container my-3">
         <div class="row">
             <div class="col text-center">
-                <h5 class="text-right text-white">Bienvenido:  <?php echo $_SESSION['nombre'];?></h5>
+                <h5 class="text-right text-white">Bienvenido:  <?php if (isset($_SESSION['usuario'])){echo $_SESSION['usuario'];} ?></h5>
             </div>
         </div>
     </div>

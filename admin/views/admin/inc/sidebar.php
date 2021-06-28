@@ -1,10 +1,16 @@
+<?php
+
+//var_dump($_SESSION['permisos']);
+
+?>
+
 <div class="col mb-3 text-white">
     <div class="table-bordered border-primary">
         <div class="card-header">
             <h5 class="text-center">Permisos</h5>
         </div>
         <ul class="list-group list-group-flush">
-            <a class="link" href="<?php if (isset($_SESSION['activo']) == 1 && $_SESSION['permisos'] == 'fullAdmin') : constant('URL')?>adminUsuarios">
+            <a class="link" href="<?php // if ($_SESSION['permisos'] == 'fullAdmin') : constant('URL')?>adminUsuarios">
                 <li class="list-group-item bg-dark">ADM - Usuarios</li>
             </a>
             <a class="link" href="#">

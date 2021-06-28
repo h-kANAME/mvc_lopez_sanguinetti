@@ -20,66 +20,76 @@ class LoginModelo extends Model
         $con = $this->db->connect();
         $datos = $con->query($query);
 
+        if($datos != null){
+
+        
         foreach ($datos as $prueba) {
 
-            if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
 
-                session_start();
-                $_SESSION['usuario'] = $usuario;
+            // if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
 
-                $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo
+            session_start();            
+
+            $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo
                           FROM usuarios u, usuarios_visibilidad v, visibilidad c
                           WHERE u.id_usuario = v.id_usuario
                           AND c.id_visibilidad = v.id_visibilidad
                           AND u.id_usuario = " . $prueba['id_usuario'];
 
-                $permisos = $con->query($query);
+            $permisos = $con->query($query);
 
-                foreach ($permisos as $codigos) {
+            foreach ($permisos as $codigos) {
 
-                    $permisos = $codigos['Codigo'];
-                }
-
-                $_SESSION['permisos'] = $permisos;
-
-                echo  $_SESSION['usuario'] . '<br>';
-                echo  $_SESSION['permisos'];
-
-             //   return true;
-            } else {
-             //   return false;
+                $permisos = $codigos['Codigo'];
             }
+
+            $_SESSION['usuario'] = $prueba['usuario'];
+            $_SESSION['permisos'] = $permisos;
+
+            // echo  $_SESSION['usuario'] . '<br>';
+            // echo  $_SESSION['permisos'];
+
+
+            //  } else {
+            //  return false;
+            //}
         }
+        return true;
+    }else{
+
+        
+    }
+
     }
 
 
-    public function login($datos)
-    {
-        $sql = "SELECT id_usuario, nombre, apellido, usuario, clave, tipo, salt, activo
-               FROM usuarios WHERE activo = 1 AND usuario = '" . $datos['usuario'] . "'";
+    // public function login($datos)
+    // {
+    //     $sql = "SELECT id_usuario, nombre, apellido, usuario, clave, tipo, salt, activo
+    //            FROM usuarios WHERE activo = 1 AND usuario = '" . $datos['usuario'] . "'";
 
 
-        $dat = $this->con->query($sql)->fetch(PDO::FETCH_ASSOC);
+    //     $dat = $this->con->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        if (isset($dat['id_usuario'])) {
-            echo 'entro';
-            if ($this->encrypt($dat['clave'], $dat['salt']) == $dat['clave']) {
+    //     if (isset($dat['id_usuario'])) {
+    //         echo 'entro';
+    //         if ($this->encrypt($dat['clave'], $dat['salt']) == $dat['clave']) {
 
-                $_SESSION['usuario'] = $dat;
-                $query = "SELECT u.id_usuario as ID, v.id_usuario_visibilidad AS Visibilidad
-                FROM usuarios u, usuarios_visibilidad v
-                WHERE u.id_usuario = v.id_usuario
-                AND u.id_usuario = " . $dat['id_usuario'];
+    //             $_SESSION['usuario'] = $dat;
+    //             $query = "SELECT u.id_usuario as ID, v.id_usuario_visibilidad AS Visibilidad
+    //             FROM usuarios u, usuarios_visibilidad v
+    //             WHERE u.id_usuario = v.id_usuario
+    //             AND u.id_usuario = " . $dat['id_usuario'];
 
-                $permisos = array();
-                foreach ($this->con->query($query) as $key => $value) {
-                    $permisos['codigo'][$key] = $value['codigo'];
-                }
+    //             $permisos = array();
+    //             foreach ($this->con->query($query) as $key => $value) {
+    //                 $permisos['codigo'][$key] = $value['codigo'];
+    //             }
 
-                $_SESSION['usuario']['permisos'] = $permisos;
-            }
-        }
-    }
+    //             $_SESSION['usuario']['permisos'] = $permisos;
+    //         }
+    //     }
+    // }
 
     private function encrypt($clave, $salt)
     {

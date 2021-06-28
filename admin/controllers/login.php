@@ -25,14 +25,30 @@ class Login extends Controller
     );
 
     $credencialesPost = $this->modelo->validacionUsuario($datos);
+
     $mensaje = '';
-    if (!$credencialesPost) {      
-      $mensaje = "El usuario no se pudo identificar";
-      $this->view->render('login/index');
-    } else {
-      $mensaje = "Usuario identificado";
-      $this->render();
-    }
+
+
+   
+      if (isset($_SESSION['usuario']) != $_POST['usuario']) {   
+        
+     
+        $mensaje = "El usuario no se pudo identificar";
+        $this->view->mensaje = $mensaje;
+        $this->view->render('login/index');
+        
+        $this->view->mensaje = $mensaje;
+      } else {
+       $this->view->mensaje = $mensaje;
+        $mensaje = "Usuario identificado";
+        header("Location:" .constant('URL') . "/adminInicio" );
+        //$this->render();
+      }
+    
+
+
+
+
     $this->view->mensaje = $mensaje;
   }
 
