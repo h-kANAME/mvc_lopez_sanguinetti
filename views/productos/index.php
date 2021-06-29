@@ -140,7 +140,7 @@
               echo '</div>'; //Cry
 
               echo '<div class="btn-group">';
-              echo '<a href="producto_modelo.php?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
+              echo '<a href="producto_modelo?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
 
               echo '</div>'; // Card body
               echo '</div>'; // Style width 20
