@@ -8,7 +8,7 @@ include_once('inc/header.php');
     <div class="container my-3">
         <div class="row">
             <div class="col text-center">
-                <h5 class="text-right text-white">Bienvenido:  <?php if (isset($_SESSION['usuario'])){echo $_SESSION['usuario'];} ?></h5>
+                
             </div>
         </div>
     </div>
@@ -23,17 +23,17 @@ include_once('inc/header.php');
                     <table class="table text-center text-white">
                         <thead>
                             <tr>
-                                <th scope="col">Tipo</th>
+                                <th scope="col">Usuario</th>
                                 <th scope="col">Visibilidad</th>
-                                <th scope="col">></th>
+                                
                             </tr>
 
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td><button class="btn btn-success" name="" value="" type="submit">></button></td>
+                                <td><?php if (isset($_SESSION['usuario'])){echo $_SESSION['usuario'];} ?></td>
+                                <td><?php echo  $_SESSION['permisos']; ?></td>
+                               
                             </tr>
                         </tbody>
 

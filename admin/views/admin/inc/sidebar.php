@@ -9,23 +9,23 @@
         <div class="card-header">
             <h5 class="text-center">Permisos</h5>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group">
             <a class="link" href="<?php // if ($_SESSION['permisos'] == 'fullAdmin') : constant('URL')?>adminUsuarios">
-                <li class="list-group-item bg-dark">ADM - Usuarios</li>
+                <li class="list-group-item text-white bg-secondary">ADMIN  Usuarios</li>
+            </a>
+            <a class="link" href="<?php // if ($_SESSION['permisos'] == 'fullAdmin') : constant('URL')?>adminProductos">
+                <li class="list-group-item text-white bg-secondary">ADMIN  Productos</li>
+            </a>
+            <a class="link" href="<?php // if ($_SESSION['permisos'] == 'fullAdmin') : constant('URL')?>gestionComentarios">
+                <li class="list-group-item text-white bg-secondary">ADMIN - Comentarios</li>
             </a>
             <a class="link" href="#">
-                <li class="list-group-item bg-dark">ADM - Productos</li>
+                <li class="list-group-item text-white bg-secondary">ADMIN  Marcas</li>
             </a>
             <a class="link" href="#">
-                <li class="list-group-item bg-dark">ADM - Comentarios</li>
-            </a>
-            <a class="link" href="#">
-                <li class="list-group-item bg-dark">ADM - Marcas</li>
-            </a>
-            <a class="link" href="#">
-                <li class="list-group-item bg-dark">ADM - Categorias</li>
+                <li class="list-group-item text-white bg-secondary">ADMIN  Categorias</li>
             </a> <a class="link" href="#">
-                <li class="list-group-item bg-dark">ADM - Sub Categorias</li>
+                <li class="list-group-item text-white bg-secondary">ADMIN  Sub Categorias</li>
             </a>
         </ul>
     </div>

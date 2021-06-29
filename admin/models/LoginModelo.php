@@ -28,28 +28,25 @@ class LoginModelo extends Model
 
             // if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
 
-            session_start();            
+           // session_start();            
 
-            $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo
-                          FROM usuarios u, usuarios_visibilidad v, visibilidad c
-                          WHERE u.id_usuario = v.id_usuario
-                          AND c.id_visibilidad = v.id_visibilidad
+            $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo, c.nombre AS Visibilidad
+                            FROM usuarios u, usuarios_visibilidad v, visibilidad c
+                            WHERE u.id_usuario = v.id_usuario
+                            AND c.id_visibilidad = v.id_visibilidad
                           AND u.id_usuario = " . $prueba['id_usuario'];
 
             $permisos = $con->query($query);
 
             foreach ($permisos as $codigos) {
-
+            
                 $permisos = $codigos['Codigo'];
+
             }
 
             $_SESSION['usuario'] = $prueba['usuario'];
             $_SESSION['permisos'] = $permisos;
-
-            // echo  $_SESSION['usuario'] . '<br>';
-            // echo  $_SESSION['permisos'];
-
-
+            
             //  } else {
             //  return false;
             //}

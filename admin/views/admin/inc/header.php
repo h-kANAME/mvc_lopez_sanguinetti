@@ -29,7 +29,7 @@
     <header>
         <nav class="navbar navbar-expand-md bg-dark">
             <div class="container ml-6 px-5">
-                <a class="navbar-brand text-white" href="<?= constant('URL') ?>login"><img src="public/img/Logos_Banners/adm.png" alt="" width="270" height="80"></a>
+                <a class="navbar-brand text-white" href="<?= constant('URL') ?>adminInicio"><img src="public/img/Logos_Banners/adm.png" alt="" width="270" height="80"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

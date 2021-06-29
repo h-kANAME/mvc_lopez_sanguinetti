@@ -31,8 +31,7 @@ class Login extends Controller
 
    
       if (isset($_SESSION['usuario']) != $_POST['usuario']) {   
-        
-     
+
         $mensaje = "El usuario no se pudo identificar";
         $this->view->mensaje = $mensaje;
         $this->view->render('login/index');
@@ -42,13 +41,8 @@ class Login extends Controller
        $this->view->mensaje = $mensaje;
         $mensaje = "Usuario identificado";
         header("Location:" .constant('URL') . "/adminInicio" );
-        //$this->render();
       }
     
-
-
-
-
     $this->view->mensaje = $mensaje;
   }
 
