@@ -8,7 +8,6 @@ class LoginModelo extends Model
         parent::__construct();
     }
 
-
     //Identidico si el usuario existe
     public function validacionUsuario($datos)
     {
@@ -16,47 +15,55 @@ class LoginModelo extends Model
         $usuario = $datos['usuario'];
         $clave = $datos['clave'];
 
-        $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
+
+
+        $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND activo = 1";
         $con = $this->db->connect();
         $datos = $con->query($query);
 
-        if($datos != null){
-
-        
-        foreach ($datos as $prueba) {
 
 
-            // if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
+        if ($datos != null) {
 
-            session_start();            
+            foreach ($datos as $row) {
 
-            $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo, c.nombre AS Visibilidad
+                $activo = $row['activo'];
+                $id_usuario = $row['id_usuario'];
+                $salt = $row['salt'];
+                $claveDba = $row['clave'];
+            }
+
+            // echo 'Ingresada por post: ' .  $clave . '<br>';
+            // echo 'En la Base: ' . $claveDba . '<br>';
+
+            $clave = $this->encrypt($clave, $salt);
+
+            // echo 'Hasheada por mi: ' . $clave . '<br>';
+
+            if ($clave == $claveDba) {
+
+                session_start();
+
+                $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo, c.nombre AS Visibilidad
                             FROM usuarios u, usuarios_visibilidad v, visibilidad c
                             WHERE u.id_usuario = v.id_usuario
                             AND c.id_visibilidad = v.id_visibilidad
-                          AND u.id_usuario = " . $prueba['id_usuario'];
+                            AND u.activo = 1
+                          AND u.id_usuario = " . $id_usuario;
 
-            $permisos = $con->query($query);
+                $permisos = $con->query($query);
 
-            foreach ($permisos as $codigos) {
-            
-                $permisos = $codigos['Codigo'];
+                foreach ($permisos as $codigos) {
 
+                    $permisos = $codigos['Codigo'];
+                }
+
+                $_SESSION['usuario'] = $usuario;
+                $_SESSION['permisos'] = $permisos;
+
+                return true;
             }
-
-            $_SESSION['usuario'] = $prueba['usuario'];
-            $_SESSION['permisos'] = $permisos;
-            
-            //  } else {
-            //  return false;
-            //}
         }
-        return true;
-    }else{
-
-        
-    }
-
     }
 
 
@@ -88,7 +95,7 @@ class LoginModelo extends Model
     //     }
     // }
 
-    private function encrypt($clave, $salt)
+    public function encrypt($clave, $salt)
     {
         $clave .= $salt;
         return hash('md5', $clave);
@@ -102,6 +109,20 @@ class LoginModelo extends Model
         return false;
     }
 
+
+    public function generate_string($input, $strength = 16)
+    {
+
+        $input_length = strlen($input);
+        $random_string = '';
+        for ($i = 0; $i < $strength; $i++) {
+            $random_character = $input[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+
+        return $random_string;
+    }
+
     public function userAdd($datos)
     {
         $nombre = $datos['nombre'];
@@ -110,26 +131,26 @@ class LoginModelo extends Model
         $clave = $datos['clave'];
         $tipo = $datos['tipo'];
 
-
         $permitted_chars = '0123456789#*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        function generate_string($input, $strength = 10)
-        {
-            $input_length = strlen($input);
-            $random_string = '';
-            for ($i = 0; $i < $strength; $i++) {
-                $random_character = $input[mt_rand(0, $input_length - 1)];
-                $random_string .= $random_character;
-            }
-
-            return $random_string;
-        }
-
-        $salt = generate_string($permitted_chars);
-        $activo = $datos['activo'];
+        //Para el primero usaremos clave: foca
+        $salt = $this->generate_string($permitted_chars, 15);
+        $clave = $this->encrypt($clave, $salt);
+        $activo = 0;
 
         $sql = "INSERT INTO usuarios (id_usuario, nombre, apellido, usuario, clave, tipo, salt, activo) 
-        VALUES (NULL, '$nombre', '$apellido', '$usuario', '$clave', '$tipo', '$salt', '$activo');";
-        $con    = $this->db->exec();
+         VALUES (NULL, '$nombre', '$apellido', '$usuario', '$clave', '$tipo', '$salt', '$activo');";
+        $con    = $this->db->connect();
         $con    = $con->exec($sql);
+    }
+
+    public function userActivo($datos)
+    {
+        $id_usuario = $datos['id_usuario'];
+
+        $sql = "UPDATE usuarios SET activo = 1 WHERE usuarios.id_usuario = $id_usuario";
+        $con    = $this->db->connect();
+        $con    = $con->exec($sql);
+
+        
     }
 }

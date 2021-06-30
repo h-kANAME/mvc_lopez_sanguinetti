@@ -29,20 +29,21 @@ class Login extends Controller
     $mensaje = '';
 
 
-   
-      if (isset($_SESSION['usuario']) != $_POST['usuario']) {   
 
-        $mensaje = "El usuario no se pudo identificar";
-        $this->view->mensaje = $mensaje;
-        $this->view->render('login/index');
-        
-        $this->view->mensaje = $mensaje;
-      } else {
-       $this->view->mensaje = $mensaje;
-       $mensaje = "Usuario identificado";
-        header("Location:" .constant('URL') . "adminInicio" );
-      }
-    
+    if (isset($_SESSION['usuario']) != $_POST['usuario']) {
+
+      $mensaje = "El usuario no se pudo identificar";
+     
+      $this->view->mensaje = $mensaje;
+      $this->view->render('login/index');
+
+      $this->view->mensaje = $mensaje;
+    } else {
+      $this->view->mensaje = $mensaje;
+      $mensaje = "Usuario identificado";
+      header("Location:" . constant('URL') . "adminInicio");
+    }
+
     $this->view->mensaje = $mensaje;
   }
 
@@ -54,20 +55,30 @@ class Login extends Controller
       'usuario'        => $_POST['usuario'],
       'clave'          => $_POST['clave'],
       'tipo'          => $_POST['tipo'],
-      'activo'          => $_POST['activo'],
-      'visibilidad'          => $_POST['visibilidad'],
-
 
     );
 
     $altaUsuario = $this->modelo->userAdd($datos);
-    $mensaje = '';
-    if (!$altaUsuario) {
-      $mensaje = "El usuario no se pudo dar de alta";
+    if ($altaUsuario) {
+      header("Location:" . constant('URL') . "adminUsuarios");
     } else {
-      $mensaje = "Usuario creado";
+      header("Location:" . constant('URL') . "adminUsuarios");
     }
-    $this->view->mensaje = $mensaje;
-    $this->render();
+  }
+
+  function userActivar()
+  {
+    $datos = array(
+      'id_usuario'            =>$_POST['id_usuario'],
+    );
+
+    var_dump($datos);
+
+    $altaUsuario = $this->modelo->userActivo($datos);
+    if ($altaUsuario) {
+      header("Location:" . constant('URL') . "adminUsuarios");
+    } else {
+      header("Location:" . constant('URL') . "adminUsuarios");
+    }
   }
 }

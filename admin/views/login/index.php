@@ -31,7 +31,7 @@
                 <div class="error"><?php echo $this->mensaje ?></div></br>
                 
                 <div class="form-group">
-                    <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="<?php echo isset($usuario->usuario) ? $usuario->usuario : ''; ?>">
+                    <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="Admin">
                     <p><input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" value=""></p>
                 </div>
                 <div class="form-group">

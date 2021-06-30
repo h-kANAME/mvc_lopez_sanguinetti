@@ -25,7 +25,7 @@ $permiso = $_SESSION['permisos'];
                 <?php } else { echo ''; } ?></a>
 
 
-        <a class="link" href="#">
+        <!-- <a class="link" href="#">
             <li class="list-group-item text-white bg-secondary">ADMIN Marcas</li>
         </a>
 
@@ -36,7 +36,8 @@ $permiso = $_SESSION['permisos'];
 
         <a class="link" href="#">
             <li class="list-group-item text-white bg-secondary">ADMIN Sub Categorias</li>
-        </a>
+        </a> -->
+        
         </ul>
     </div>
 </div>
