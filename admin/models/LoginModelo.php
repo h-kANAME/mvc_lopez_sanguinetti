@@ -28,7 +28,7 @@ class LoginModelo extends Model
 
             // if ($usuario == $_POST['usuario'] && $clave == $_POST['clave']) {
 
-           // session_start();            
+            session_start();            
 
             $query = "SELECT u.nombre as Nombre, c.codigo AS Codigo, c.nombre AS Visibilidad
                             FROM usuarios u, usuarios_visibilidad v, visibilidad c

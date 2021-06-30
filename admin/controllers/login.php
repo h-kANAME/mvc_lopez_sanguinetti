@@ -39,8 +39,8 @@ class Login extends Controller
         $this->view->mensaje = $mensaje;
       } else {
        $this->view->mensaje = $mensaje;
-        $mensaje = "Usuario identificado";
-        header("Location:" .constant('URL') . "/adminInicio" );
+       $mensaje = "Usuario identificado";
+        header("Location:" .constant('URL') . "adminInicio" );
       }
     
     $this->view->mensaje = $mensaje;
