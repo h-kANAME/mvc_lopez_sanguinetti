@@ -8,7 +8,7 @@ include_once('inc/con_db.php');
     <div class="container text-center my-5">
         <di class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-4">
 
 
                 <form action='<?php echo constant('URL'); ?>login/userAdd' method="post">
@@ -51,7 +51,7 @@ include_once('inc/con_db.php');
                 </form>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
 
                 <form action='editarUsuarios' method="post">
 
@@ -90,7 +90,7 @@ include_once('inc/con_db.php');
                             ?>
 
                                 <tr>
-                                    <th><input type="text" name="id_usuario" value="<?php echo $id_usuario?>"></th>
+                                    <th><input class="text-center" type="text" name="id_usuario" value="<?php echo $id_usuario?>"></th>
                                     <th name="usuario"><?php echo $usuario ?></th>
                                     <td name="tipo"><?php echo $tipo ?></td>
                                     <td name="estado"><?php echo $estado ?></td>

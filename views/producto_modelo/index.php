@@ -118,11 +118,10 @@ foreach ($this->productos as $row) {
             $sql = "INSERT INTO comentarios (id_comentario, fecha, ip, id_producto, descripcion, calificacion, email, aprobado) VALUES (NULL, '$fecha', $ipActual, '$id_producto', '$comentario', '$califaicacion', '$email', '$estado');";
             $submit = $connect->exec($sql);
 
-            echo 'Comentario enviado, aguarda aprobacion del administrador';
+            echo '<div class="text-center my-3"> <h5>Comentario enviado, aguarda aprobacion del administrador</h5> </div>';
 
             if ($submit) {
-                echo '<br>';
-                echo $fecha;
+                echo '<div class="text-center my-3"> <h5>' . $fecha . '</h5> </div>';
             } else {
                 echo 'Rompe';
             }
@@ -141,7 +140,7 @@ foreach ($this->productos as $row) {
                     foreach ($resultado as $row) {
 
                         if ($row['aprobado'] > 0 && $id_producto == $row['id_producto']) {
-                            
+
                             $comentarioF = $row["calificacion"];
                             if ($comentarioF == 0) {
                                 $calificacion = '';

@@ -47,7 +47,10 @@ include_once('inc/con_db.php');
                                     <th scope="row"><?php echo $usuario ?></th>
                                     <td><?php echo $tipo ?></td>
                                     <td><?php echo $estado ?></td>
-                                    <td><button class="btn btn-sm btn-warning btn-block" type="submit" name="login">Editar</button></td>
+                                    <td>
+                                    <button class="btn btn-sm btn-success btn-block" type="submit" name="login">Activar</button>
+                                    <button class="btn btn-sm btn-danger btn-block" type="submit" name="login">Desactivar</button>
+                                    </td>
                                 </tr>
 
                             <?php } ?>

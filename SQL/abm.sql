@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2021 a las 23:19:33
+-- Tiempo de generación: 30-06-2021 a las 23:31:37
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -64,9 +64,38 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `fecha`, `ip`, `id_producto`, `descripcion`, `calificacion`, `email`, `aprobado`) VALUES
-(1, '2021-05-02', '123', 1, 'Comentario Uno', 2, 'admin@kyz.com.ar', 0),
+(1, '2021-05-02', '123', 1, 'Comentario Uno', 2, 'admin@kyz.com.ar', 1),
 (2, '2021-05-02', '124', 1, 'Cambie la ip a 125', 3, 'luis--ao@hotmail.com', 1),
-(3, '2021-05-11', '123', 1, 'asd', 4, 'luipso@gmail.com', 0);
+(3, '2021-05-11', '123', 1, 'asd', 4, 'luipso@gmail.com', 1),
+(5, '2021-06-29', '124', 1, 'Probando con duki', 0, 'colo96@gmail.com', 0),
+(6, '2021-06-30', '124', 9, 'Magnifico!!', 3, 'colo96@gmail.com', 1),
+(7, '2021-06-30', '124', 9, 'Genial!!', 4, 'colo96@gmail.com', 1),
+(8, '2021-06-30', '124', 2, 'Pense que era mejor!!!', 3, 'colo96@gmail.com', 1),
+(9, '2021-06-30', '124', 2, 'Bien hasta ahi', 4, 'colo96@gmail.com', 1),
+(10, '2021-06-30', '124', 3, 'La memoria anda lenta', 3, 'colo96@gmail.com', 1),
+(11, '2021-06-30', '124', 3, 'Bien ponele', 4, 'colo96@gmail.com', 1),
+(12, '2021-06-30', '124', 4, 'Buenisimooo, me cambio la vida!!', 5, 'colo96@gmail.com', 1),
+(13, '2021-06-30', '124', 4, 'Mas rapido que una ferrari!!', 5, 'colo96@gmail.com', 1),
+(14, '2021-06-30', '124', 5, 'Vuelaaaaaaaaa', 4, 'colo96@gmail.com', 1),
+(15, '2021-06-30', '124', 5, 'Niceeee', 4, 'colo96@gmail.com', 1),
+(16, '2021-06-30', '124', 6, 'Esperaba mas velocidad', 2, 'colo96@gmail.com', 1),
+(17, '2021-06-30', '124', 7, 'Extraordinario!!!!', 4, 'colo96@gmail.com', 1),
+(18, '2021-06-30', '124', 8, 'La verdad me cambio la vida!', 5, 'colo96@gmail.com', 1),
+(19, '2021-06-30', '124', 10, 'Con este programa parezco lindo!', 5, 'colo96@gmail.com', 1),
+(20, '2021-06-30', '124', 11, 'Magia pura', 4, 'colo96@gmail.com', 1),
+(21, '2021-06-30', '124', 12, 'Me saco todas las arrugas!!', 3, 'colo96@gmail.com', 1),
+(22, '2021-06-30', '124', 13, 'Gran Sistema operativo, igual aguante linux', 5, 'colo96@gmail.com', 1),
+(23, '2021-06-30', '124', 14, 'Juega en primera', 4, 'colo96@gmail.com', 1),
+(24, '2021-06-30', '124', 15, 'PERO QUE JUEGAZOOOO', 4, 'colo96@gmail.com', 1),
+(25, '2021-06-30', '124', 16, 'CON ESTO PUEDO LLEVAR MIS FINANZAS', 4, 'colo96@gmail.com', 1),
+(26, '2021-06-30', '124', 17, 'Parece musica real!!!!!!', 5, 'colo96@gmail.com', 1),
+(27, '2021-06-30', '124', 18, 'Una locuraggggg', 4, 'colo96@gmail.com', 1),
+(28, '2021-06-30', '124', 19, 'No se desliza del todo bien!!', 2, 'colo96@gmail.com', 1),
+(29, '2021-06-30', '124', 20, 'Pego todos head con este, una bomba.', 4, 'colo96@gmail.com', 1),
+(30, '2021-06-30', '124', 21, 'ALTO PADDD', 5, 'colo96@gmail.com', 1),
+(31, '2021-06-30', '124', 22, 'Uffff me encanto, juega en primera.', 4, 'colo96@gmail.com', 1),
+(32, '2021-06-30', '124', 23, 'Las luces no son rgb como dicen, ESTAFADORESSSSS!!!!', 1, 'colo96@gmail.com', 1),
+(33, '2021-06-30', '124', 24, 'ESTAS LUCES SON RGB??? ME ES TA FA RON!!!!!!!!!!!!!!!', 1, 'colo96@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -208,8 +237,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `usuario`, `clave`, `tipo`, `salt`, `activo`) VALUES
-(1, 'Emmanuel', 'Lopez', 'Admin', 'asd', 1, 'salt', 1),
-(2, 'Juan', 'Rodriguez', 'jrodriguez@kyz.com.ar', 'asd', 2, 'asd', 1);
+(3, 'Comentarios', 'Comentarios', 'Comentarios', '635291f581573aabfb587eb9ff8f3972', 3, 'dQJt8zMSS*aBzHj', 1),
+(4, 'Emmanuel', 'Lopez', 'Admin', '47da5fc46b36c880e21309192799fa5c', 1, 'mNMA2jpWS7VbCCy', 1);
 
 -- --------------------------------------------------------
 
@@ -249,7 +278,8 @@ CREATE TABLE `usuarios_visibilidad` (
 --
 
 INSERT INTO `usuarios_visibilidad` (`id_usuario_visibilidad`, `id_usuario`, `id_visibilidad`) VALUES
-(1, 1, 7);
+(3, 3, 3),
+(4, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -269,12 +299,10 @@ CREATE TABLE `visibilidad` (
 
 INSERT INTO `visibilidad` (`id_visibilidad`, `nombre`, `codigo`) VALUES
 (1, 'Crear Usuarios', 'userAdd'),
-(2, 'Modificar - Eliminar Usuarios', 'userEdit'),
-(3, 'Visualizar Productos', 'productView'),
-(4, 'Editar - Agregar Productos', 'productEdit'),
-(5, 'Gestion de Comentarios', 'commentAccecs'),
-(6, 'Gestion de Rotulos', 'labelAcces'),
-(7, 'Control Absoluto', 'fullAdmin');
+(2, 'Editar - Agregar Productos', 'productEdit'),
+(3, 'Gestion de Comentarios', 'commentAccecs'),
+(4, 'Gestion de Rotulos', 'labelAcces'),
+(5, 'Control Absoluto', 'fullAdmin');
 
 --
 -- Índices para tablas volcadas
@@ -357,7 +385,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -387,7 +415,7 @@ ALTER TABLE `sub_categorias`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_tipos`
@@ -399,7 +427,7 @@ ALTER TABLE `usuarios_tipos`
 -- AUTO_INCREMENT de la tabla `usuarios_visibilidad`
 --
 ALTER TABLE `usuarios_visibilidad`
-  MODIFY `id_usuario_visibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario_visibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `visibilidad`

@@ -1,6 +1,6 @@
 <footer class="bg-dark text-white py-3">
     <div class="text-center">
-        <p> <a href="https://github.com/h-kANAME/produccionWeb" target="_blank"><img src="public/img/Logos_Banners/gitHubLogo.png" width="50" height="50" alt=""></a></p>
+        <p> <a href="https://github.com/h-kANAME/mvc_lopez_sanguinetti" target="_blank"><img src="public/img/Logos_Banners/gitHubLogo.png" width="50" height="50" alt=""></a></p>
         <p>Repositorio</p>
         <p></p>
     </div>
