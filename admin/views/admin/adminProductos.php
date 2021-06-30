@@ -7,11 +7,6 @@ include_once('inc/con_db.php');
 <div class="container my-5">
     <div class="row">
 
-        <div class="col-md-3">
-            <?php include_once('inc/sidebar.php'); ?>
-        </div>
-
-
         <!-- <div class="col-md-9">
             <form class="table-bordered border-primary" action="gestionProductos.php" method="post">
                 <h4 class="card-header text-center text-white">Gestion de Productos</h4>
@@ -54,7 +49,7 @@ include_once('inc/con_db.php');
 
         </div> -->
 
-        <div class="col-md-9">
+        <div class="col-md-12">
             <form class="table-bordered border-primary" action="gestionProductos" method="post">
                 <h4 class="card-header text-center text-white">Gestion de Productos</h4>
                 <table class="table text-center text-white">
@@ -93,19 +88,13 @@ include_once('inc/con_db.php');
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"> </div>
-    </div>
-</div>
+
 </div>
 
 <div class="container">
     <div class="row">
 
-        <div class="col-md-3"> </div>
-
-        <div class="col-md-9 text-white">
+         <div class="col-md-12 text-white">
             <form class="my-3 table-bordered border-primary" action="" method="post">
                 <h3 class="card-title col mb-3 text-center">Alta producto</h3>
                 <div class="col mb-3">

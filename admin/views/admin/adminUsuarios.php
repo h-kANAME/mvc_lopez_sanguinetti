@@ -1,5 +1,6 @@
 <?php
 include_once('inc/header.php');
+include_once('inc/con_db.php');
 ?>
 
 <body class="backdark">
@@ -7,11 +8,7 @@ include_once('inc/header.php');
     <div class="container text-center my-5">
         <di class="row">
 
-            <div class="col-md-3">
-                <?php include_once('inc/sidebar.php'); ?>
-            </div>
-
-            <div class="col-md-4">
+            <div class="col-md-6">
 
 
                 <form action='<?php echo constant('URL'); ?>login/userAdd' method="post">
@@ -34,7 +31,7 @@ include_once('inc/header.php');
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
 
                 <form action='#' method="post">
 

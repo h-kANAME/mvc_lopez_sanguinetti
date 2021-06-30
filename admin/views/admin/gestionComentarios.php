@@ -19,9 +19,7 @@ $request = $connect->query($query);
 <div class="container my-5">
     <div class="row">
 
-        <div class="col-md-2 text-center"> <?php include_once('inc/sidebar.php'); ?> </div>
-
-        <div class="col-md-10 text-white">
+        <div class="col-md-12 text-white">
             <form class="table-bordered border-primary" action="" method="POST">
                 <h3 class="card-title col mb-3 text-center">Gestion de Mensajes</h3>
 
@@ -60,8 +58,6 @@ $request = $connect->query($query);
                     <?php
                                     }
                                 }
-
-
 
                     ?>
                         </tbody>

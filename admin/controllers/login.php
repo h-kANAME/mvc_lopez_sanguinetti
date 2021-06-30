@@ -55,6 +55,7 @@ class Login extends Controller
       'clave'          => $_POST['clave'],
       'tipo'          => $_POST['tipo'],
       'activo'          => $_POST['activo'],
+      'visibilidad'          => $_POST['visibilidad'],
 
 
     );
