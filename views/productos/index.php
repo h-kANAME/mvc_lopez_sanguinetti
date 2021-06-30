@@ -112,18 +112,35 @@
             ) {
 
               foreach ($this->ranqueos as $ranq){
-
+                
+               
                 $ranqueo = new Ranqueo();
                 $ranqueo = $ranq;
-
-                // echo 'Producto: ' . $ranqueo->producto . '<br>';
-                 //echo 'Valoracion: ' . $ranqueo->calificacion . '<br>';
+                if ($ranqueo->id_producto  == $row->id_producto){
+                  $rank = $ranqueo->calificacion;
+                  if($ranqueo->calificacion > 0.5){
+                    $rank = '★★';
+                  }
+                  if($ranqueo->calificacion > 1.5){
+                    $rank = '★★';
+                  }
+                  if($ranqueo->calificacion > 2.5){
+                    $rank = '★★★';
+                  }
+                  if($ranqueo->calificacion > 3.5){
+                    $rank = '★★★★';
+                  }
+                  if($ranqueo->calificacion > 4.5){
+                    $rank = '★★★★★';
+                  }
                 }
+                else {
+                  $rank = null;
+                }
+              }
               
 
-               if($ranqueo->calificacion == 5){
-                 $ranqueo->calificacion = '★';
-               }
+               
 
               echo '<div class="col-md-4 card-body">';
               echo '<div class="card" style="width: 20rem;">';
@@ -135,7 +152,7 @@
 
               echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
 
-              echo '<h6 class="card-text">' . 'Valoracion: ' . $ranqueo->calificacion . '</h6>';
+              echo '<h6 class="card-text">' . 'Valoracion: ' . $rank . '</h6>';
 
               echo '</div>'; //Cry
 

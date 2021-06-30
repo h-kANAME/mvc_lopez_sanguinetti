@@ -176,7 +176,7 @@ class ProductosModelo extends Model
 
     $ranqueos = [];
     try {
-      $query  = "SELECT productos.modelo AS Producto, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
+      $query  = "SELECT productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
                  FROM productos, comentarios
                  WHERE productos.id_producto = comentarios.id_producto
                  GROUP BY productos.modelo";
@@ -189,6 +189,7 @@ class ProductosModelo extends Model
 
         $ranqueo->producto           = $row['Producto'];
         $ranqueo->calificacion           = $row['Ranqueo'];
+        $ranqueo->id_producto            = $row['Id'];  
         array_push($ranqueos, $ranqueo);
       }
       return $ranqueos;
