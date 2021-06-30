@@ -80,12 +80,6 @@ foreach ($this->productos as $row) {
 
                                                 <input type="submit" name="comentar" class="btn btn-success" onclick="$aBase()">
                                             </div>
-                                            <div class="col-md-4 mb-6">
-
-                                                <a href='pdf.php?id_producto=<?php echo $row->id_producto   ?>'>
-                                                    <h4 class='btn btn-primary aline-center'>Descargar detalles</h4>
-                                                </a>
-                                            </div>
 
 
                                         </div>

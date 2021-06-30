@@ -38,12 +38,12 @@
   <div class="container my-6">
     <div class="row">
 
-      <div class="col-lg-5">
+      <div class="col-lg-5 mx-auto">
         <form action="">
           <div class="list-group lista-filtros" data-categoria=<?php echo '"' . $id_categoria . '"' ?> data-marca=<?php echo '"' . $id_marca . '"' ?>>
 
             <?php
-            echo ' <h3 class="">  <a class="filtro-categorias"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';           
+            echo ' <h3 class="">  <a class="filtro-categorias mx-auto"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';           
             foreach ($this->marcas as $row) {
               $marca = new Marca();
               $marca = $row;
@@ -56,7 +56,7 @@
             echo '</div>';
             echo '</div>';
             echo  '<div class="col-lg-5 mx-auto">';
-            echo ' <h3 class="mx-auto ">  <a class="filtro-categorias" data-id="categoria"  href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=">Categorias</a> </h3>';
+            echo ' <h3 class="mx-auto">  <a class="filtro-categorias" data-id="categoria"  href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=">Categorias</a> </h3>';
             foreach ($this->categorias as $row) {
               $categoria = new Categoria();
               $categoria = $row;
@@ -69,7 +69,7 @@
 
 
             
-            echo ' <h3 class="">  <a class="filtro-categorias"  data-id="sub_categoria"  href="' . $PAGINA_LISTADO . '?id_sub_categoria=&id_sub_categoria=' . $id_sub_categoria . '">Sub Categoria</a> </h3>';           
+            echo ' <h3 class=" mx-auto">  <a class="filtro-categorias"  data-id="sub_categoria"  href="' . $PAGINA_LISTADO . '?id_sub_categoria=&id_sub_categoria=' . $id_sub_categoria . '">Sub Categoria</a> </h3>';           
             foreach ($this->subCategorias as $row) {
               $subCategoria = new SubCategoria();
               $subCategoria = $row;
