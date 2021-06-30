@@ -7,7 +7,7 @@ require 'views/header.php';
 <html lang="es">
 
 <head>
-    <title>Inicio</title>
+  <title>Inicio</title>
 </head>
 
 <body class="backdark">
@@ -50,11 +50,11 @@ require 'views/header.php';
 
   <div class="container">
     <div class="card text-center my-5">
-        <div class="btn btn-primary">
-            <h5 class="mb-0">Productos destacados</h5>
-        </div>
+      <div class="btn btn-primary">
+        <h5 class="mb-0">Productos destacados</h5>
+      </div>
     </div>
-</div>
+  </div>
 
   <div class="container">
     <div class="col-md-12 my-3">
@@ -67,15 +67,37 @@ require 'views/header.php';
           $destacado = $row;
           if ($destacado->destacado = 'destacado') {
         ?>
-
+            <?php
+            if ($destacado->rank > 0) {
+              $rank = '';
+            }
+            if ($destacado->rank > 0) {
+              $rank = '★';
+            }
+            if ($destacado->rank > 1) {
+              $rank = '★★';
+            }
+            if ($destacado->rank > 2) {
+              $rank = '★★★';
+            }
+            if ($destacado->rank > 3) {
+              $rank = '★★★★';
+            }
+            if ($destacado->rank > 4) {
+              $rank = '★★★★★';
+            }
+            ?>
             <div class="card">
-              <img src="<?php echo $destacado->imagen?>" class="card-img-top" alt="...">
+              <img src="<?php echo $destacado->imagen ?>" class="card-img-top" alt="...">
 
               <div class="card-body">
                 <h5 class="card-title"><?php echo $destacado->modelo ?></h5>
                 <p class="card-text"><?php echo 'ARS ' . $destacado->precio ?></p>
+                <?php
+                echo '<h6 class="card-title">' . 'Valoracion: ' . $rank . '</h6>'
+                ?>
               </div>
-              <a href="producto_modelo?id_producto=<?php echo $destacado->id_producto?>" class="btn btn-primary">Detalles</a>
+              <a href="producto_modelo?id_producto=<?php echo $destacado->id_producto ?>" class="btn btn-primary">Detalles</a>
             </div>
 
           <?php } ?>

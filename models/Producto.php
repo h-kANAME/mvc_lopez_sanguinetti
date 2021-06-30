@@ -11,5 +11,6 @@ class Producto {
     public $imagen_max;
     public $id_sub_categoria;
     public $estado_activo;
+    public $rank;
 }
 ?>

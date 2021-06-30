@@ -28,7 +28,12 @@ class ProductosModelo extends Model
 
     $productos = [];
     try {
-      $query  = "SELECT * FROM productos WHERE estado_activo = 1 ORDER BY modelo $ordenBy";
+      $query  = "SELECT productos.id_producto, productos.descripcion, productos.id_marca, productos.id_categoria, productos.modelo, productos.destacado, productos.precio, productos.imagen, productos.imagen_max, productos.id_sub_categoria, productos.estado_activo, 
+      productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
+                       FROM productos, comentarios
+                       WHERE productos.id_producto = comentarios.id_producto
+                       GROUP BY productos.modelo
+                       ORDER BY productos.modelo $ordenBy";
       $con    = $this->db->connect();
       $con    = $con->query($query);
 
@@ -47,6 +52,7 @@ class ProductosModelo extends Model
         $producto->imagen_max            = $row['imagen_max'];
         $producto->id_sub_categoria      = $row['id_sub_categoria'];
         $producto->estado_activo         = $row['estado_activo'];
+        $producto->rank                  = $row['Ranqueo'];
         array_push($productos, $producto);
       }
       return $productos;

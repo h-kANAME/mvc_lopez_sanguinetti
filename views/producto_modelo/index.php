@@ -147,8 +147,11 @@ foreach ($this->productos as $row) {
                     foreach ($resultado as $row) {
 
                         if ($row['aprobado'] > 0 && $id_producto == $row['id_producto']) {
-
+                            
                             $comentarioF = $row["calificacion"];
+                            if ($comentarioF == 0) {
+                                $calificacion = '';
+                            }
                             if ($comentarioF == 1) {
                                 $calificacion = '★';
                             } else if ($comentarioF == 2) {

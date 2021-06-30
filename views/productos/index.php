@@ -111,34 +111,21 @@
               && ($producto->id_categoria == $id_categoria || $id_categoria == '')
             ) {
 
-              foreach ($this->ranqueos as $ranq){
-                
-               
-                $ranqueo = new Ranqueo();
-                $ranqueo = $ranq;
-                if ($ranqueo->id_producto  == $row->id_producto){
-                  $rank = $ranqueo->calificacion;
-                  if($ranqueo->calificacion > 0.5){
-                    $rank = '★★';
-                  }
-                  if($ranqueo->calificacion > 1.5){
-                    $rank = '★★';
-                  }
-                  if($ranqueo->calificacion > 2.5){
-                    $rank = '★★★';
-                  }
-                  if($ranqueo->calificacion > 3.5){
-                    $rank = '★★★★';
-                  }
-                  if($ranqueo->calificacion > 4.5){
-                    $rank = '★★★★★';
-                  }
-                }
-                else {
-                  $rank = null;
-                }
-              }
               
+              if ($producto->rank > 0) {
+                $rank = '';
+            }
+            if ($producto->rank > 0) {
+                $rank = '★';
+            } if ($producto->rank > 1) {
+                $rank = '★★';
+            } if ($producto->rank > 2) {
+                $rank = '★★★';
+            } if ($producto->rank > 3) {
+                $rank = '★★★★';
+            } if ($producto->rank > 4) {
+                $rank = '★★★★★';
+            }
 
                
 
