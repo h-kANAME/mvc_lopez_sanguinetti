@@ -195,7 +195,7 @@ class ProductosModelo extends Model
 
         $ranqueo->producto           = $row['Producto'];
         $ranqueo->calificacion           = $row['Ranqueo'];
-        $ranqueo->id_producto            = $row['Id'];  
+        $ranqueo->id_producto            = $row['Id'];
         array_push($ranqueos, $ranqueo);
       }
       return $ranqueos;
@@ -203,4 +203,13 @@ class ProductosModelo extends Model
       return [];
     }
   }
+
+  public function addCamposDinamicosInput()
+  {
+
+    
+    
+
+  }
 }
+

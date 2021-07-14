@@ -7,7 +7,7 @@
 
 <body>
 
-    <?php require 'views/header.php'; ?>
+    <?php require 'views/admin/inc/header.php'; ?>
     <div class="container my-5">
         <div class="row">
             <div class="col">

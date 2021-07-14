@@ -21,8 +21,6 @@ class LoginModelo extends Model
         $con = $this->db->connect();
         $datos = $con->query($query);
 
-
-
         if ($datos != null) {
 
             foreach ($datos as $row) {
@@ -49,7 +47,7 @@ class LoginModelo extends Model
                             WHERE u.id_usuario = v.id_usuario
                             AND c.id_visibilidad = v.id_visibilidad
                             AND u.activo = 1
-                          AND u.id_usuario = " . $id_usuario;
+                            AND u.id_usuario = " . $id_usuario;
 
                 $permisos = $con->query($query);
 
@@ -66,34 +64,6 @@ class LoginModelo extends Model
         }
     }
 
-
-    // public function login($datos)
-    // {
-    //     $sql = "SELECT id_usuario, nombre, apellido, usuario, clave, tipo, salt, activo
-    //            FROM usuarios WHERE activo = 1 AND usuario = '" . $datos['usuario'] . "'";
-
-
-    //     $dat = $this->con->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-    //     if (isset($dat['id_usuario'])) {
-    //         echo 'entro';
-    //         if ($this->encrypt($dat['clave'], $dat['salt']) == $dat['clave']) {
-
-    //             $_SESSION['usuario'] = $dat;
-    //             $query = "SELECT u.id_usuario as ID, v.id_usuario_visibilidad AS Visibilidad
-    //             FROM usuarios u, usuarios_visibilidad v
-    //             WHERE u.id_usuario = v.id_usuario
-    //             AND u.id_usuario = " . $dat['id_usuario'];
-
-    //             $permisos = array();
-    //             foreach ($this->con->query($query) as $key => $value) {
-    //                 $permisos['codigo'][$key] = $value['codigo'];
-    //             }
-
-    //             $_SESSION['usuario']['permisos'] = $permisos;
-    //         }
-    //     }
-    // }
 
     public function encrypt($clave, $salt)
     {
@@ -150,7 +120,6 @@ class LoginModelo extends Model
         $sql = "UPDATE usuarios SET activo = 1 WHERE usuarios.id_usuario = $id_usuario";
         $con    = $this->db->connect();
         $con    = $con->exec($sql);
-
-        
     }
+
 }
