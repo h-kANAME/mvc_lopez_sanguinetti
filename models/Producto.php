@@ -12,5 +12,6 @@ class Producto {
     public $id_sub_categoria;
     public $estado_activo;
     public $rank;
+    //public $caracteristicas;
 }
 ?>

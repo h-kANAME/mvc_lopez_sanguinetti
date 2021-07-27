@@ -40,4 +40,19 @@ class AgregarCampos extends Controller
 
         $activarCampos = $this->modelo->activarCampos($datos);
     }
+
+    function activarCamposComentarios()
+    {
+
+        /*
+        
+        */
+        $datos = array(
+            'id_comentarios_campo_dinamico' => $_POST['id_comentario_campo_dinamico'],
+            'estado_activo'          => $_POST['estado_activo'],
+
+        );
+
+        $activarCamposComentarios = $this->modelo->activarCamposComentarios($datos);
+    }
 }

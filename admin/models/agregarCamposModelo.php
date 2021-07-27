@@ -56,4 +56,30 @@ class AgregarCamposModelo extends Model
             }
         }
     }
+
+    public function activarCamposComentarios($datos)
+    {
+        $id_comentarios_campo_dinamico = $datos["id_comentarios_campo_dinamico"];
+        $estado_activo = $datos["estado_activo"];
+
+        echo '<pre>';
+        var_dump($datos);
+        echo '</pre>';
+
+
+        if ($datos) {
+
+            $sql = "UPDATE comentarios_campo_dinamico SET estado_activo = '$estado_activo' WHERE comentarios_campo_dinamico.id_comentario_campo_dinamico = $id_comentarios_campo_dinamico";
+     
+            $con = $this->db->connect();
+            $activarCampo = $con->exec($sql);
+
+
+            if ($activarCampo == false) {
+                header("Location:" . constant('URL') . "adminProductos");
+            } else {
+                header("Location:" . constant('URL') . "adminProductos");
+            }
+        }   
+    }
 }

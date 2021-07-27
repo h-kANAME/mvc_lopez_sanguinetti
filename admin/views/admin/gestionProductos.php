@@ -2,7 +2,6 @@
 include_once('inc/header.php');
 include_once('inc/con_db.php');
 
-
 $id_producto = $_POST['productoID'];
 
 $query = "SELECT * FROM productos WHERE id_producto = $id_producto";
@@ -107,11 +106,10 @@ $camposDinamicos = $connect->query($query);
                                 if ($request) {
 
                                     foreach ($request as $row) {
-
-
                                 ?>
 
                                         <tr class="text-center text-white">
+
                                             <th scope="row">
 
                                                 <select name="id_producto_campo_dinamico" class="mdb-select md-form" required>
@@ -143,12 +141,11 @@ $camposDinamicos = $connect->query($query);
     </div>
 
 
-
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-white">
                 <form class="my-3 table-bordered border-primary" action='<?php echo constant('URL'); ?>agregarCampos/agregarCampos' method="post">
-                    <h3 class="card-title col mb-3 text-center">Agregar Campo Dinamico</h3>
+                    <h3 class="card-title col mb-3 text-center">Campo Dinamico Productos</h3>
 
                     <div class="col mb-3">
                         <table class="table">
@@ -260,13 +257,78 @@ $camposDinamicos = $connect->query($query);
     </div>
 
 
-    <!--
 
-				<div class="form-group">
-					
-				</div>
+    <!-- Productos campo dinamico open-->
 
- -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-white">
+
+                <form method="post" class="my-3 table-bordered border-primary" action='<?php echo constant('URL'); ?>agregarCampos/activarCamposComentarios'>
+                    <h3 class="card-title col mb-3 text-center">Habilitar campo dinamico Comentarios</h3>
+
+                    <div class="col mb-3">
+                        <table class="table">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Caracteristica</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Cambiar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                $machete = "INSERT INTO comentarios_campo_dinamico (id_comentario_campo_dinamico, id_producto, value, type, estado_activo)
+                                            VALUES (NULL, '16', 'Licencia 6 meses, Licencia 12 meses, Licencia Ilimitada', '3', '0')";
+
+                                $consulta = "SELECT comentarios_campo_dinamico.id_comentario_campo_dinamico, comentarios_campo_dinamico.value, comentarios_campo_dinamico.type, comentarios_campo_dinamico.estado_activo        
+                                             FROM comentarios_campo_dinamico, productos
+                                             WHERE productos.id_producto = comentarios_campo_dinamico.id_producto
+                                             AND productos.id_producto = $id_producto";
+
+                                $request =  $connect->query($consulta);
+
+
+                                if ($request) {
+
+                                    foreach ($request as $row) {
+                                ?>
+
+                                        <tr class="text-center text-white">
+
+                                            <th scope="row">
+
+                                                <select name="id_comentario_campo_dinamico" class="mdb-select md-form" required>
+                                                    <option name="<?php echo $row['id_comentario_campo_dinamico'] ?>"><?php echo $row['id_comentario_campo_dinamico'] ?></option>
+                                                </select>
+
+                                            </th>
+
+                                            <td><?php echo $row['value'] ?></td>
+                                            <td><input class="text-center" type="text" value="<?php echo $row['estado_activo'] ?>" name="estado_activo"></td>
+                                            <td><button type="submit" class="btn btn-success text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;">Ok</button></td>
+                                        </tr>
+
+                                <?php
+                                    }
+                                }
+                                ?>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- close -->
 
     <div class="container">
         <div class="row">

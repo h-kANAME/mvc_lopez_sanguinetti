@@ -1,11 +1,9 @@
 <?php
 include_once 'models/ProductoModelo.php';
+include_once 'con_db.php';
 $PAGINA_LISTADO = 'producto_modelo';
 require 'views/header.php';
 include_once('config/con_db.php');
-
-
-
 
 $id_producto = $_REQUEST['id_producto'];
 
@@ -15,11 +13,6 @@ foreach ($this->productos as $row) {
     if ($row->id_producto == $id_producto) {
 
 ?>
-
-
-
-
-
         <div class="container">
             <div class="text-center">
                 <div class="card body bg-dark col-6 mt-5 mx-auto">
@@ -42,13 +35,36 @@ foreach ($this->productos as $row) {
                             <thead>
                                 <tr>
 
-                                    <th scope="col" class="text-warning">Descripcion</th>
+                                    <td scope="col" class="text-warning">Descripcion: </td>
+                                    <td class="text-warning"><?php echo $row->descripcion ?></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-warning"><?php echo $row->descripcion ?></td>
+
+                                    <?php
+                                    $query = "SELECT d.id_producto_campo_dinamico, d.value
+                      
+                                    FROM productos, productos_campo_dinamico d          
+                                    WHERE productos.id_producto = d.id_producto
+                                    AND D.estado_activo = 1
+                                    AND productos.id_producto = $row->id_producto";
+
+                                    $respuesta = $connect->query($query);
+                                    $contador = 0;
+
+                                    foreach ($respuesta as $row) {
+
+                                        $contador++;
+                                    ?>
+
+                                        <td class="text-warning">Caracteristica N°<?php echo $contador ?> </td>
+                                        <td class="text-warning"><?php echo $row['value'] ?></td>
+
                                 </tr>
+                            <?php
+                                    }
+                            ?>
                             </tbody>
                         </table>
                     </div>
