@@ -44,35 +44,70 @@ $camposDinamicos = $connect->query($query);
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-white">
-                <form class="my-3 table-bordered border-primary" action="" method="post">
-                    <h3 class="card-title col mb-3 text-center">Modificar Campos</h3>
-                    <div class="col mb-3">
-                        <label class="form-label">Editar nombre</label>
-                        <input type="text" class="form-control" value="<?php echo $producto['modelo'] ?>">
-                    </div>
 
-                    <div class="col mb-3">
-                        <label class="form-label">Editar descripcion</label>
-                        <input type="text" class="form-control" value="<?php echo $producto['descripcion'] ?>">
-                    </div>
+                <form class="my-3 table-bordered border-primary" method="post" action='<?php echo constant('URL'); ?>agregarCampos/editarProducto'>
+                    <h3 class="card-title col mb-3 text-center">Editar Producto</h3>
 
-                    <div class="col mb-3">
-                        <label class="form-label">Editar Precio</label>
-                        <input type="text" class="form-control" value="<?php echo $producto['precio'] ?>">
-                    </div>
+                    <?php
+                    $query = "SELECT * FROM productos WHERE id_producto = $id_producto";
+                    $request =  $connect->query($query);
 
+                    foreach ($request as $row) {
+                    }
+                    ?>
                     <div class="col mb-3">
-                        <label class="form-label">Editar Categoria</label>
-                        <input type="text" class="form-control" value="<?php echo $producto['id_categoria'] ?>">
-                    </div>
+                        <table class="table">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Marca</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-white">
+                                    <td><input name="id_producto" class="text-center" type="text" value="<?php echo $id_producto ?>"></td>
+                                    <td><input name="modelo" class="text-center" type="text" value="<?php echo $row['modelo'] ?>"></td>
+                                    <td><input name="descripcion" class="text-center" type="text" value="<?php echo $row['descripcion'] ?>"></td>
+                                    <td><input name="precio" class="text-center" type="text" value="<?php echo $row['precio'] ?>"></td>
 
-                    <div class="col mb-3">
-                        <label class="form-label">Editar Marca</label>
-                        <input type="text" class="form-control" value="<?php echo $producto['id_marca'] ?>">
-                    </div>
 
-                    <div class="col mb-3">
-                        <td><button class="btn btn-success" name="productoID" value="<?php echo $producto['id_producto'] ?>" type="submit">Actualizar</button></td>
+                                    <th class="text-center" scope="row">
+                                        <select name="categorias" required>
+                                            <?php
+                                            $query = "SELECT * FROM categorias";
+                                            $respuesta = $connect->query($query);
+                                            foreach ($respuesta as $row) {
+                                            ?>
+                                                <option> <?php echo $row['id_categoria'] ?> </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </th>
+
+                                    <th class="text-center" scope="row">
+                                        <select name="marcas" required>
+                                            <?php
+                                            $query = "SELECT * FROM marcas";
+                                            $respuesta = $connect->query($query);
+                                            foreach ($respuesta as $row) {
+                                            ?>
+                                                <option> <?php echo $row['id_marca'] ?> </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;">Aplicar Cambios</button>
                     </div>
 
                 </form>
@@ -212,7 +247,7 @@ $camposDinamicos = $connect->query($query);
         <div class="row">
             <div class="col-md-12 text-white">
 
-                <form method="post" class="my-3 table-bordered border-primary">
+                <form method="post" class="my-3 table-bordered border-primary" action='<?php echo constant('URL'); ?>agregarCampos/activarProducto'>
                     <h3 class="card-title col mb-3 text-center">Cambio de Estados</h3>
 
                     <div class="col mb-3">
@@ -221,29 +256,43 @@ $camposDinamicos = $connect->query($query);
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Estado Actual</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Cambiar</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr class="text-center text-white">
-                                    <th scope="row"><?php echo $producto['id_producto'] ?></th>
-                                    <td><?php echo $producto['modelo'] ?></td>
-                                    <td class="text-white"><?php echo $stat ?></td>
+                                    <?php
+                                    $productos = "SELECT * FROM productos WHERE id_producto = $id_producto";
+                                    $request =  $connect->query($productos);
+
+                                    foreach ($request as $row) {
+
+                                    ?>
+
+                                        <td>
+                                            <select name="id_producto" class="mdb-select md-form" required>
+                                                <option name="<?php echo $row['id_producto']; ?>"><?php echo $row['id_producto'] ?></option>
+                                            </select>
+                                        </td>
+
+                                        <td><?php echo $producto['modelo'] ?></td>
+
+                                        <td><input class="text-center" type="text" value="<?php echo $row['estado_activo'] ?>" name="estado_activo"></td>
+
+                                        <td><button type="submit" class="btn btn-success text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;">Ok</button></td>
+
+                                    <?php
+                                    }
+                                    ?>
                     </div>
 
                     </tr>
                     </tbody>
                     </table>
             </div>
-            <div class="text-center col mb-3">
-                <button type="submit" class="btn btn-success text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;" href="gestionProductos?estado=1&productoID=<?php echo $id_producto ?> <?php $_POST['productoID'] ?>">Activar</a></button>
 
-                <button type="submit" class="btn btn-danger text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;" href="gestionProductos?estado=0&productoID=<?php echo $id_producto ?>">Desactivar</a></button>
-
-                <?php
-
-                ?>
-            </div>
             </form>
 
             <?php

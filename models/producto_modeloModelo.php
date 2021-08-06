@@ -35,6 +35,7 @@ class Producto_modeloModelo extends Model
                       
                       FROM productos, comentarios, productos_campo_dinamico d    
                       WHERE productos.id_producto = comentarios.id_producto
+                      AND productos.estado_activo = 1
                       GROUP BY productos.modelo
                       ORDER BY productos.modelo $ordenBy";
 

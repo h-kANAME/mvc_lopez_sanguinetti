@@ -15,7 +15,9 @@ class MainModelo extends Model
             $query  = "SELECT productos.id_producto, productos.descripcion, productos.id_marca, productos.id_categoria, productos.modelo, productos.destacado, productos.precio, productos.imagen, productos.imagen_max, productos.id_sub_categoria, productos.estado_activo, 
             productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
                              FROM productos, comentarios
-                             WHERE productos.id_producto = comentarios.id_producto AND productos.destacado = 'true'
+                             WHERE productos.id_producto = comentarios.id_producto 
+                             AND productos.estado_activo = 1
+                             AND productos.destacado = 'true'                             
                              GROUP BY productos.modelo";
 
             
@@ -46,4 +48,3 @@ class MainModelo extends Model
         }
     }
 }
-?>

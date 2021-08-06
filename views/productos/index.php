@@ -101,8 +101,6 @@
           <?php
           include_once "models/ProductosModelo.php";
 
-
-
           foreach ($this->productos as $row) {
 
             $producto = new Productos();

@@ -32,6 +32,7 @@ class ProductosModelo extends Model
       productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
                        FROM productos, comentarios
                        WHERE productos.id_producto = comentarios.id_producto
+                       AND productos.estado_activo = 1
                        GROUP BY productos.modelo
                        ORDER BY productos.modelo $ordenBy";
       $con    = $this->db->connect();
@@ -185,7 +186,9 @@ class ProductosModelo extends Model
       $query  = "SELECT productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
                  FROM productos, comentarios
                  WHERE productos.id_producto = comentarios.id_producto
+                 AND productos.estado_activo = 1
                  GROUP BY productos.modelo";
+                 
       $con    = $this->db->connect();
       $con    = $con->query($query);
 
@@ -204,12 +207,5 @@ class ProductosModelo extends Model
     }
   }
 
-  public function addCamposDinamicosInput()
-  {
-
-    
-    
-
-  }
 }
 
