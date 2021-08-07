@@ -13,6 +13,27 @@ class AgregarCampos extends Controller
         $this->view->render('admin/applyCamposDinamicos');
     }
 
+    function productoNuevo()
+    {
+        $datos = array(
+
+            'modelo'          => $_POST['modelo'],
+            'descripcion'     => $_POST['descripcion'],
+            'precio'          => $_POST['precio'],
+            'id_categoria'      => $_POST['id_categoria'],
+            'id_sub_categoria'      => $_POST['id_sub_categoria'],
+            'id_marca'          => $_POST['id_marca'],
+            'imagen'          => $_POST['imagen'],
+            'imagen_max'          => $_POST['imagen_max'],
+          //  'archivo_imagen' => $_FILES['archivo_imagen'],
+          //  'archivo_imagen_max' => $_FILES['archivo_imagen_max'],
+
+
+        );
+
+        $productoNuevo = $this->modelo->productoNuevo($datos);
+    }
+
     function editarProducto()
     {
         $datos = array(

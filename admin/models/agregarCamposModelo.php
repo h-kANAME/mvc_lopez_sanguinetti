@@ -9,6 +9,59 @@ class AgregarCamposModelo extends Model
         parent::__construct();
     }
 
+    public function productoNuevo($datos)
+    {
+
+        $modelo = $datos["modelo"];
+        $descripcion = $datos["descripcion"];
+        $precio = $datos["precio"];
+        $id_categoria = $datos["id_categoria"];
+        $id_sub_categoria = $datos["id_sub_categoria"];
+        $id_marca = $datos["id_marca"];
+        $imagen = 'public/img/Hardware/' . $datos["imagen"];
+        $imagen_max = 'img/Hardware/Max/' . $datos["imagen_max"];
+        $estado_activo = 0;
+
+        echo '<pre>';
+        var_dump($datos);
+        echo '</pre>';
+
+        // $_FILES['archivo_imagen'];
+        // //$nombre = $_FILES['archivo']['name'];
+        //  $guardado = $_FILES['imagen']['tmp_name'];
+ 
+        //  if (file_exists('public')) {
+        //      move_uploaded_file($guardado, 'public/img/Hardware/' . $datos['imagen']);
+        //  } else {
+        //      die();
+        //  }
+ 
+        //  $_FILES['archivo_imagen_max'];
+        //  //$nombre = $_FILES['archivo']['name'];
+        //  $guardado = $_FILES['imagen_max']['tmp_name'];
+ 
+        //  if (file_exists('public')) {
+        //      move_uploaded_file($guardado, 'img/Hardware/Max/' . $datos['imagen_max']);
+        //  } else {
+        //      die();
+        //  }
+
+        if ($datos) {
+           
+            echo $sql = "INSERT INTO productos (id_producto, descripcion, id_marca, id_categoria, modelo, destacado, precio, imagen, imagen_max, id_sub_categoria, estado_activo)
+                    VALUES (NULL, '$descripcion', '$id_marca', '$id_categoria', '$modelo', 'false', ' $precio', ' $imagen', '$imagen_max', '$id_sub_categoria', '$estado_activo');";
+
+            $con = $this->db->connect();
+            $productoNuevo = $con->exec($sql);
+
+            if ($productoNuevo == false) {
+                header("Location:" . constant('URL') . "adminProductos");
+            } else {
+                header("Location:" . constant('URL') . "adminProductos");
+            }
+        }
+    }
+
     public function editarProducto($datos)
     {
         $id_producto = $datos["id_producto"];
@@ -27,7 +80,7 @@ class AgregarCamposModelo extends Model
                     id_categoria = $categorias,
                     id_marca = $marcas
                     WHERE productos.id_producto = $id_producto";
-            
+
             echo '<pre>';
             var_dump($datos);
             echo '</pre>';
@@ -78,7 +131,7 @@ class AgregarCamposModelo extends Model
 
         if ($campos == 'input') {
 
-            $sql = "INSERT INTO `productos_campo_dinamico` (`id_producto_campo_dinamico`, `id_producto`, `id_campo_dinamico`, `value`, `type`, `estado_activo`)
+            $sql = "INSERT INTO productos_campo_dinamico (id_producto_campo_dinamico, id_producto, id_campo_dinamico, value, type, estado_activo)
                               VALUES (NULL, '$id_producto', '1', '$value', '$type', '$estado_activo')";
 
             $con = $this->db->connect();

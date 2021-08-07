@@ -64,6 +64,7 @@ $camposDinamicos = $connect->query($query);
                                     <th scope="col">Descripcion</th>
                                     <th scope="col">Precio</th>
                                     <th scope="col">Categoria</th>
+                                    <th scope="col">S. Categoria</th>
                                     <th scope="col">Marca</th>
                                 </tr>
                             </thead>
@@ -83,6 +84,21 @@ $camposDinamicos = $connect->query($query);
                                             foreach ($respuesta as $row) {
                                             ?>
                                                 <option> <?php echo $row['id_categoria'] ?> </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </th>
+
+                                    <th class="text-center" scope="row">
+                                        <select name="sub_categorias" required>
+                                            <?php
+                                            $query = "SELECT * FROM sub_categorias";
+                                            $respuesta = $connect->query($query);
+                                            foreach ($respuesta as $row) {
+                                            ?>
+                                                <option> <?php echo $row['id_sub_categoria'] ?> </option>
                                             <?php
                                             }
                                             ?>
@@ -111,6 +127,94 @@ $camposDinamicos = $connect->query($query);
                     </div>
 
                 </form>
+
+                <div class="col md-3 my-1">
+                    <ul class="list-group">
+                        <li class="list-group-item active" aria-current="true">Referencia Categorias</li>
+                        <table class="table text-center text-white">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Codigo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php
+                                    $query = "SELECT * FROM categorias WHERE estado_activo = 1";
+                                    $respuesta = $connect->query($query);
+                                    foreach ($respuesta as $row) {
+                                    ?>
+
+                                        <th scope="row"><?php echo $row['nombre'] ?></th>
+                                        <td><?php echo $row['id_categoria'] ?></td>
+                                </tr>
+                            <?php
+                                    }
+                            ?>
+                            </tbody>
+                        </table>
+                    </ul>
+                </div>
+
+                <div class="col md-3 my-1">
+                    <ul class="list-group">
+                        <li class="list-group-item active" aria-current="true">Referencia Sub Categorias</li>
+                        <table class="table text-center text-white">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Codigo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php
+                                    $query = "SELECT * FROM sub_categorias WHERE estado_activo = 1";
+                                    $respuesta = $connect->query($query);
+                                    foreach ($respuesta as $row) {
+                                    ?>
+
+                                        <th scope="row"><?php echo $row['nombre'] ?></th>
+                                        <td><?php echo $row['id_sub_categoria'] ?></td>
+                                </tr>
+                            <?php
+                                    }
+                            ?>
+                            </tbody>
+                        </table>
+                    </ul>
+                </div>
+
+                <div class="col md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item active" aria-current="true">Referencia Marcas</li>
+                        <table class="table text-center text-white">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Codigo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php
+                                    $query = "SELECT * FROM marcas WHERE estado_activo = 1";
+                                    $respuesta = $connect->query($query);
+                                    foreach ($respuesta as $row) {
+                                    ?>
+
+                                        <th scope="row"><?php echo $row['nombre'] ?></th>
+                                        <td><?php echo $row['id_marca'] ?></td>
+                                </tr>
+                            <?php
+                                    }
+                            ?>
+                            </tbody>
+                        </table>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -162,7 +266,6 @@ $camposDinamicos = $connect->query($query);
                                     }
                                 }
                                 ?>
-
 
                             </tbody>
                         </table>
@@ -235,8 +338,6 @@ $camposDinamicos = $connect->query($query);
             </div>
         </div>
     </div>
-
-
 
     </form>
     </div>
@@ -382,51 +483,78 @@ $camposDinamicos = $connect->query($query);
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-white">
-                <form class="my-3 table-bordered border-primary" action="" method="post">
+                <form class="my-3 table-bordered border-primary" method="post" action='<?php echo constant('URL'); ?>agregarCampos/productoNuevo'>
                     <h3 class="card-title col mb-3 text-center">Alta producto Nuevo</h3>
                     <div class="col mb-3">
-                        <label class="form-label">Nombre del produccto</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Nombre</label>
+                        <input name="modelo" type="text" class="form-control">
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Descripcion del producto</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Descripcion</label>
+                        <input name="descripcion" type="text" class="form-control">
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Editar Precio</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Precio</label>
+                        <input name="precio" type="text" class="form-control">
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Precio Producto</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Marca</label>
+                        <select name="id_marca" required>
+                            <?php
+                            $query = "SELECT * FROM marcas WHERE estado_activo = 1";
+                            $respuesta = $connect->query($query);
+                            foreach ($respuesta as $row) {
+                            ?>
+                                <option> <?php echo $row['id_marca'] ?> </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Seleccionar Marca</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Categoria</label>
+                        <select name="id_categoria" required>
+                            <?php
+                            $query = "SELECT * FROM categorias WHERE estado_activo = 1";
+                            $respuesta = $connect->query($query);
+                            foreach ($respuesta as $row) {
+                            ?>
+                                <option> <?php echo $row['id_categoria'] ?> </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Seleccionar Categoria</label>
-                        <input type="text" class="form-control">
+                        <label class="form-label">Sub Categoria</label>
+                        <select name="id_sub_categoria" required>
+                            <?php
+                            $query = "SELECT * FROM sub_categorias WHERE estado_activo = 1";
+                            $respuesta = $connect->query($query);
+                            foreach ($respuesta as $row) {
+                            ?>
+                                <option> <?php echo $row['id_sub_categoria'] ?> </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Seleccionar sub Categoria</label>
-                        <input type="text" class="form-control">
+                        <label for="">Imagen pequeña</label>
+                        <br>
+                        <input name="archivo_imagen" type="file" id="archivo_imagen">
                     </div>
 
                     <div class="col mb-3">
-                        <label class="form-label">Deseo dar de alta el producto en estado..</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="col mb-3">
-
-                        <input type="file" id="archivo" name="archivo">
+                        <label for="">Imagen Grande</label>
+                        <br>
+                        <input name="archivo_imagen_max" type="file" id="archivo_imagen_max">
                     </div>
 
                     <div class="col mb-3">
