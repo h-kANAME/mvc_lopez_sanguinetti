@@ -24,20 +24,10 @@ $permiso = $_SESSION['permisos'];
                 <li class="list-group-item text-white bg-secondary">ADMIN Comentarios</li>
                 <?php } else { echo ''; } ?></a>
 
-
-        <!-- <a class="link" href="#">
-            <li class="list-group-item text-white bg-secondary">ADMIN Marcas</li>
-        </a>
-
-
-        <a class="link" href="#">
-            <li class="list-group-item text-white bg-secondary">ADMIN Categorias</li>
-        </a>
-
-        <a class="link" href="#">
-            <li class="list-group-item text-white bg-secondary">ADMIN Sub Categorias</li>
-        </a> -->
-        
+                <a class="link" <?php if (isset($_SESSION['permisos']) && $_SESSION['permisos'] == 'fullAdmin' || $_SESSION['permisos'] == 'labelAcces') { ?> href="<?php constant('URL') ?> gestionRotulos">
+                <li class="list-group-item text-white bg-secondary">ADMIN Rotulos</li>
+                <?php } else { echo ''; } ?></a>
+       
         </ul>
     </div>
 </div>

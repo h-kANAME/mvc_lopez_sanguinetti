@@ -5,40 +5,28 @@ include_once('inc/header.php');
 
 <body class="backdark">
 
-    <div class="container my-3">
+    <div class="container my-5">
         <div class="row">
             <div class="col text-center">
-                
+            <div class="card">
+                    <h4 class="card-header">Usuario conectado</h4>
+                    <h5 class="card-text text-success"> <?php if (isset($_SESSION['usuario'])) {
+                            echo $_SESSION['usuario'];
+                        } ?></h5>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
+          
+
+            <div class="col-md-12">
+
             <?php include 'inc/sidebar.php'; ?>
 
-            <div class="col-md-9">
-                <form class="table-bordered border-primary" action="#" method="post">
-                    <h4 class="card-header text-center text-white">Permisos Habilitados</h4>
-                    <table class="table text-center text-white">
-                        <thead>
-                            <tr>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Visibilidad</th>
-                                
-                            </tr>
 
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><?php if (isset($_SESSION['usuario'])){echo $_SESSION['usuario'];} ?></td>
-                                <td><?php echo  $_SESSION['permisos']; ?></td>
-                               
-                            </tr>
-                        </tbody>
-
-                    </table>
-                </form>
 
             </div>
         </div>

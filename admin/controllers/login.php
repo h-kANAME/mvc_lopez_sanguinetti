@@ -33,7 +33,7 @@ class Login extends Controller
     if (isset($_SESSION['usuario']) != $_POST['usuario']) {
 
       $mensaje = "El usuario no se pudo identificar";
-     
+
       $this->view->mensaje = $mensaje;
       $this->view->render('login/index');
 
@@ -69,10 +69,11 @@ class Login extends Controller
   function userActivar()
   {
     $datos = array(
-      'id_usuario'            =>$_POST['id_usuario'],
+      'id_usuario'            => $_POST['id_usuario'],
+      'activo'                => $_POST['activ'],
+      'visibilidad'           => $_POST['visibilidad'],
     );
 
-    var_dump($datos);
 
     $altaUsuario = $this->modelo->userActivo($datos);
     if ($altaUsuario) {

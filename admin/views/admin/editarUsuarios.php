@@ -1,7 +1,7 @@
 <?php
 include_once('inc/header.php');
 include_once('inc/con_db.php');
-
+$id_usuario = $_POST['id_usuario'];
 ?>
 
 <body class="backdark">
@@ -9,31 +9,31 @@ include_once('inc/con_db.php');
         <di class="row">
             <div class="col-md-12">
 
-                <form action='#' method="post">
+                <form action='<?php echo constant('URL'); ?>login/userActivar' method="post">
 
                     <h1 class="card-header bg-primary text-white">Edicion</h1>
                     <br>
                     <table class="table text-white">
                         <thead>
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Usuario</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Estado actual</th>
+                                <th scope="col">Cambiar a</th>
+                                <th scope="col">Visibilidad</th>
                                 <th scope="col">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <?php
-                            $query = "SELECT usuarios.usuario as usuario, usuarios_tipos.nombre AS tipo, usuarios.activo
-                            FROM usuarios, usuarios_tipos
-                            WHERE usuarios.tipo = usuarios_tipos.id_tipo
-                            ORDER BY usuarioS.usuario ASC";
+                            $query = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
                             $respuesta = $connect->query($query);
                             foreach ($respuesta as $row) {
 
+                                $id_usuario = $row['id_usuario'];
                                 $usuario = $row['usuario'];
-                                $tipo = $row['tipo'];
+
                                 $estado = $row['activo'];
 
                                 if ($estado == '0') {
@@ -44,25 +44,83 @@ include_once('inc/con_db.php');
                             ?>
 
                                 <tr>
+                                    <th scope="row">
+                                        <select name="id_usuario">
+                                            <option><?php echo $id_usuario ?></option>
+                                        </select>
+                                    </th>
+
                                     <th scope="row"><?php echo $usuario ?></th>
-                                    <td><?php echo $tipo ?></td>
                                     <td><?php echo $estado ?></td>
+
                                     <td>
-                                    <button class="btn btn-sm btn-success btn-block" type="submit" name="login">Activar</button>
-                                    <button class="btn btn-sm btn-danger btn-block" type="submit" name="login">Desactivar</button>
+                                        <select name="activ" class="mdb-select md-form" required>
+                                            <option>Activo</option>
+                                            <option>Inactivo</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                    
+                                        <select name="visibilidad">
+                                            <?php
+                                            $query = "SELECT * FROM visibilidad";
+                                            $respuesta = $connect->query($query);
+
+                                            foreach ($respuesta as $row) {
+                                            ?>
+                                                <option><?php echo $row['id_visibilidad'] ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </td>
+
+                                    <td>
+                                        <button class="btn btn-sm btn-success btn-block" type="submit">Cambiar</button>
                                     </td>
                                 </tr>
 
                             <?php } ?>
                         </tbody>
                     </table>
-
-
-
                 </form>
-
-
             </div>
     </div>
+
+    <div>
+
+        <div class="container md-3 my-1">
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true">Referencia Visibilidad</li>
+                <table class="table text-center text-white">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Codigo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            $query = "SELECT * FROM visibilidad";
+                            $respuesta = $connect->query($query);
+                            foreach ($respuesta as $row) {
+                            ?>
+
+                                <th scope="row"><?php echo $row['nombre'] ?></th>
+                                <td><?php echo $row['id_visibilidad'] ?></td>
+                        </tr>
+                    <?php
+                            }
+                    ?>
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+
+    </div>
+
     </div>
 </body>

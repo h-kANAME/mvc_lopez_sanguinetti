@@ -54,7 +54,6 @@ include_once('inc/con_db.php');
             <div class="col-md-8">
 
                 <form action='editarUsuarios' method="post">
-
                     <h1 class="card-header bg-primary text-white">Edicion</h1>
                     <br>
                     <table class="table text-white">
@@ -68,12 +67,12 @@ include_once('inc/con_db.php');
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php
                             $query = "SELECT usuarios.id_usuario AS id_usuario ,usuarios.usuario as usuario, usuarios_tipos.nombre AS tipo, usuarios.activo
                             FROM usuarios, usuarios_tipos
                             WHERE usuarios.tipo = usuarios_tipos.id_tipo
-                            ORDER BY usuarioS.usuario ASC";
+                            ORDER BY usuarios.usuario ASC";
+
                             $respuesta = $connect->query($query);
                             foreach ($respuesta as $row) {
 
@@ -88,21 +87,21 @@ include_once('inc/con_db.php');
                                     $estado = 'Activo';
                                 }
                             ?>
-
                                 <tr>
-                                    <th><input class="text-center" type="text" name="id_usuario" value="<?php echo $id_usuario?>"></th>
-                                    <th name="usuario"><?php echo $usuario ?></th>
-                                    <td name="tipo"><?php echo $tipo ?></td>
-                                    <td name="estado"><?php echo $estado ?></td>
-                                    <td><button class="btn btn-sm btn-warning btn-block" type="submit" name="login">Editar</button></td>
-                                </tr>
+                                    <th>
+                                        <input class="text-center" type="text" value="<?php echo $row['id_usuario'] ?>">
+                                    </th>
+                                    <th><?php echo $usuario ?></th>
+                                    <th><?php echo $tipo ?></th>
+                                    <th><?php echo $estado ?></th>
 
+
+                                    <th><button class="btn btn-sm btn-warning btn-block" name="id_usuario" value="<?php echo $row['id_usuario'] ?>" type="submit">Gestionar</button></th>
+                                </tr>
                             <?php } ?>
+
                         </tbody>
                     </table>
-
-
-
                 </form>
 
 

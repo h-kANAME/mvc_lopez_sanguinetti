@@ -31,17 +31,11 @@
                 <div class="error"><?php echo $this->mensaje ?></div></br>
                 
                 <div class="form-group">
-                    <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="Admin">
+                    <p><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="admin.emmanuel@kyz.com.ar">
                     <p><input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" value=""></p>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Ingresar</button>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <span class="card-body text-left"><a href="#">Olvide mi Clave</a></span>
-                        <span class="card-body text-right"><a href="#">Cambiar Clave</a></span>
-                    </div>
                 </div>
             </form>
 

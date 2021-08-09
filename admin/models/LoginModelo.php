@@ -8,6 +8,8 @@ class LoginModelo extends Model
         parent::__construct();
     }
 
+
+
     //Identidico si el usuario existe
     public function validacionUsuario($datos)
     {
@@ -116,10 +118,21 @@ class LoginModelo extends Model
     public function userActivo($datos)
     {
         $id_usuario = $datos['id_usuario'];
+        $activo = $datos['activo'];
+        $visibilidad = $datos['visibilidad'];
 
-        $sql = "UPDATE usuarios SET activo = 1 WHERE usuarios.id_usuario = $id_usuario";
+        if ($activo == 'Inactivo') {
+            $activo = 0;
+        } elseif ($activo == 'Activo') {
+            $activo = 1;
+        }
+
+        $sql = "UPDATE usuarios SET activo = $activo WHERE usuarios.id_usuario = $id_usuario";
         $con    = $this->db->connect();
         $con    = $con->exec($sql);
-    }
 
+        $sqlVisibilidad = "INSERT INTO usuarios_visibilidad (id_usuario_visibilidad, id_usuario, id_visibilidad) VALUES (NULL, '$id_usuario', '$visibilidad')";
+        $con    = $this->db->connect();
+        $con    = $con->exec($sqlVisibilidad);
+    }
 }
