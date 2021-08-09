@@ -23,10 +23,10 @@ class GestionRotulosModelo extends Model
 
         if ($datos) {
 
-            echo '<h1>Modelo</h1>' . '<br>';
-            echo $sql = "UPDATE marcas SET nombre = '$nombre', estado_activo = $estado 
+            //echo '<h1>Modelo</h1>' . '<br>';
+            $sql = "UPDATE marcas SET nombre = '$nombre', estado_activo = $estado 
             WHERE marcas.id_marca = $id_marca;";
-            die();
+
             $con = $this->db->connect();
             $editarMarca = $con->exec($sql);
 
@@ -41,14 +41,48 @@ class GestionRotulosModelo extends Model
 
     public function crearMarca($datos)
     {
-        $id_comentario = $datos["id_comentario"];
+        $nombre = $datos["nombre"];
 
         if ($datos) {
 
-            $sql = "";
+            $sql = "INSERT INTO marcas (id_marca, nombre, estado_activo) VALUES (NULL, '$nombre', '0');";
             $con = $this->db->connect();
             $crearMarca = $con->exec($sql);
 
+
+            if ($crearMarca == false) {
+                header("Location:" . constant('URL') . "gestionRotulos");
+            } else {
+                header("Location:" . constant('URL') . "gestionRotulos");
+            }
+        }
+    }
+
+    public function crearCategoria($datos)
+    {
+        $nombre = $datos["nombre"];
+        if ($datos) {
+
+            $sql = "INSERT INTO categorias (id_categoria, nombre, estado_activo) VALUES (NULL, '$nombre', '0');";
+            $con = $this->db->connect();
+            $crearMarca = $con->exec($sql);
+
+            if ($crearMarca == false) {
+                header("Location:" . constant('URL') . "gestionRotulos");
+            } else {
+                header("Location:" . constant('URL') . "gestionRotulos");
+            }
+        }
+    }
+
+    public function crearSubCategoria($datos)
+    {
+        $nombre = $datos["nombre"];
+        if ($datos) {
+
+            $sql = "INSERT INTO sub_categorias (id_sub_categoria, nombre, estado_activo) VALUES (NULL, '$nombre', '0');";
+            $con = $this->db->connect();
+            $crearMarca = $con->exec($sql);
 
             if ($crearMarca == false) {
                 header("Location:" . constant('URL') . "gestionRotulos");

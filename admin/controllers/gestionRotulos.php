@@ -33,14 +33,44 @@ class GestionRotulos extends Controller{
       }
     }
 
-    function crearRotulo()
+    function crearMarca()
     {
       $datos = array(
-        'id_comentario' => $_POST['id_comentario'],
+        'nombre' => $_POST['nombre'],
   
       );
   
-      $altaRotulo = $this->modelo->desaprobarComentario($datos);
+      $altaRotulo = $this->modelo->crearMarca($datos);
+      if ($altaRotulo) {
+        header("Location:" . constant('URL') . "gestionRotulos");
+      } else {
+        header("Location:" . constant('URL') . "gestionRotulos");
+      }
+    }
+
+    function crearCategoria()
+    {
+      $datos = array(
+        'nombre' => $_POST['nombre'],        
+  
+      );
+
+       $altaRotulo = $this->modelo->crearCategoria($datos);
+      if ($altaRotulo) {
+        header("Location:" . constant('URL') . "gestionRotulos");
+      } else {
+        header("Location:" . constant('URL') . "gestionRotulos");
+      }
+    }
+
+    function crearSubCategoria()
+    {
+      $datos = array(
+        'nombre' => $_POST['nombre'],        
+  
+      );
+
+       $altaRotulo = $this->modelo->crearSubCategoria($datos);
       if ($altaRotulo) {
         header("Location:" . constant('URL') . "gestionRotulos");
       } else {
