@@ -30,6 +30,40 @@ foreach ($this->productos as $row) {
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title text-warning">Ranqueo</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <?php
+                                    $query = "SELECT productos.id_producto, productos.descripcion, productos.id_marca, productos.id_categoria, productos.modelo, productos.destacado, productos.precio, productos.imagen, productos.imagen_max, productos.id_sub_categoria, productos.estado_activo, 
+                                    productos.modelo AS Producto, productos.id_producto AS Id, SUM(comentarios.calificacion) / COUNT(comentarios.calificacion) AS Ranqueo, comentarios.descripcion AS Comentario
+                                                    
+                                                    
+                                                    FROM productos, comentarios, productos_campo_dinamico d    
+                                                    WHERE productos.id_producto = comentarios.id_producto
+                                                    AND productos.estado_activo = 1
+                                                    AND productos.id_producto = $id_producto
+                                                    GROUP BY productos.modelo
+                                                    ORDER BY productos.modelo";
+                                    $respranq = $connect->query($query);
+
+                                    foreach ($respranq as $r) {
+                                        $ranqueo = $r['Ranqueo'];
+                                    }
+
+                                    ?>
+                                    <p class="card-text text-warning lead"><?php echo '★ ' . number_format($ranqueo) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div>
                         <table class="table table-striped cardMainColor">
                             <thead>

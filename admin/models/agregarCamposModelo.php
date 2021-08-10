@@ -29,17 +29,17 @@ class AgregarCamposModelo extends Model
         // $_FILES['archivo_imagen'];
         // //$nombre = $_FILES['archivo']['name'];
         //  $guardado = $_FILES['imagen']['tmp_name'];
- 
+
         //  if (file_exists('public')) {
         //      move_uploaded_file($guardado, 'public/img/Hardware/' . $datos['imagen']);
         //  } else {
         //      die();
         //  }
- 
+
         //  $_FILES['archivo_imagen_max'];
         //  //$nombre = $_FILES['archivo']['name'];
         //  $guardado = $_FILES['imagen_max']['tmp_name'];
- 
+
         //  if (file_exists('public')) {
         //      move_uploaded_file($guardado, 'img/Hardware/Max/' . $datos['imagen_max']);
         //  } else {
@@ -47,7 +47,7 @@ class AgregarCamposModelo extends Model
         //  }
 
         if ($datos) {
-           
+
             echo $sql = "INSERT INTO productos (id_producto, descripcion, id_marca, id_categoria, modelo, destacado, precio, imagen, imagen_max, id_sub_categoria, estado_activo)
                     VALUES (NULL, '$descripcion', '$id_marca', '$id_categoria', '$modelo', 'false', ' $precio', ' $imagen', '$imagen_max', '$id_sub_categoria', '$estado_activo');";
 
@@ -123,16 +123,54 @@ class AgregarCamposModelo extends Model
     public function agregarCampos($datos)
     {
         $id_producto = $datos["id_producto"];
-        $campos = $datos["campos"]; //listado de campos dinamiccos
-        $type = $datos["type"]; //el type que llevara el campo, si es que contiene
         $value = $datos["value"]; //pudiera ser el value /placeholsder del campo
         $estado_activo = 0;
 
 
-        if ($campos == 'input') {
+        if ($datos) {
+            //PR
+            $sql = "INSERT INTO productos_campo_dinamico (id_producto_campo_dinamico, id_producto, id_campo_dinamico, value, estado_activo)
+                              VALUES (NULL, '$id_producto', '1', '$value', '$estado_activo')";
 
-            $sql = "INSERT INTO productos_campo_dinamico (id_producto_campo_dinamico, id_producto, id_campo_dinamico, value, type, estado_activo)
-                              VALUES (NULL, '$id_producto', '1', '$value', '$type', '$estado_activo')";
+            $con = $this->db->connect();
+            $camposDinamicosAgregar = $con->exec($sql);
+
+
+            if ($camposDinamicosAgregar == false) {
+                header("Location:" . constant('URL') . "adminProductos");
+            } else {
+                header("Location:" . constant('URL') . "adminProductos");
+            }
+        }
+    }
+
+    public function agregarCamposComentarios($datos)
+    {
+        $id_producto = $datos["id_producto"];
+        $name = $datos["name"];
+        $value = $datos["value"];
+        $campos = $datos["campos"];
+        $estado_activo = 0;
+
+
+        if ($campos == 'select') {
+            $c = 3;
+        } else if ($campos == 'input') {
+            $c = 1;
+        }
+
+        // echo $campos . '<br>';
+        // echo $c;
+
+        // die();
+        // echo '<pre>';
+        // var_dump($datos, true);
+        // echo '</pre>';
+
+        if ($datos) {
+
+            echo    $sql = "INSERT INTO comentarios_campo_dinamico (id_comentario_campo_dinamico, id_producto, nombre, value, type, estado_activo)
+                    VALUES (NULL, '$id_producto', '$name', '$value', '$c', '$estado_activo');";
 
             $con = $this->db->connect();
             $camposDinamicosAgregar = $con->exec($sql);

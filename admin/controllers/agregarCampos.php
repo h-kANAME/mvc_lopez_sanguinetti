@@ -25,8 +25,8 @@ class AgregarCampos extends Controller
             'id_marca'          => $_POST['id_marca'],
             'imagen'          => $_POST['imagen'],
             'imagen_max'          => $_POST['imagen_max'],
-          //  'archivo_imagen' => $_FILES['archivo_imagen'],
-          //  'archivo_imagen_max' => $_FILES['archivo_imagen_max'],
+            //  'archivo_imagen' => $_FILES['archivo_imagen'],
+            //  'archivo_imagen_max' => $_FILES['archivo_imagen_max'],
 
 
         );
@@ -62,15 +62,27 @@ class AgregarCampos extends Controller
 
     function agregarCampos()
     {
+        //PR
         $datos = array(
             'id_producto' => $_POST['id_producto'],
-            'campos'          => $_POST['campos'],
-            'type'        => $_POST['type'],
             'value'          => $_POST['value'],
 
         );
 
         $camposDinamicosAgregar = $this->modelo->agregarCampos($datos);
+    }
+
+    function agregarCamposComentarios()
+    {
+        $datos = array(
+            'id_producto' => $_POST['id_producto'],
+            'name'        => $_POST['name'],
+            'campos'      => $_POST['campos'],
+            'value'       => $_POST['value'],
+
+        );
+
+        $camposDinamicosComentariosAgregar = $this->modelo->agregarCamposComentarios($datos);
     }
 
     function activarCampos()
