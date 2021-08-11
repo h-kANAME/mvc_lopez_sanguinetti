@@ -79,6 +79,7 @@ class AgregarCampos extends Controller
             'name'        => $_POST['name'],
             'campos'      => $_POST['campos'],
             'value'       => $_POST['value'],
+            'palabras'          => $_POST['palabras'],
 
         );
 
@@ -99,8 +100,8 @@ class AgregarCampos extends Controller
     function activarCamposComentarios()
     {
         $datos = array(
-            'id_comentarios_campo_dinamico' => $_POST['id_comentario_campo_dinamico'],
-            'estado_activo'          => $_POST['estado_activo'],
+            'id_comentario_campo_dinamico' => $_POST['id_comentario_campo_dinamico'],
+            'activo'          => $_POST['activo'],
 
         );
 

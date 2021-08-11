@@ -57,7 +57,7 @@ foreach ($this->productos as $row) {
                                     }
 
                                     ?>
-                                    <p class="card-text text-warning lead"><?php echo '★ ' . number_format($ranqueo) ?></p>
+                                    <p class="card-text text-warning lead"><?php echo ' ★ ' . number_format($ranqueo) . '/5' ?></p>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,6 @@ foreach ($this->productos as $row) {
                         <table class="table table-striped cardMainColor">
                             <thead>
                                 <tr>
-
                                     <td scope="col" class="text-warning">Descripcion: </td>
                                     <td class="text-warning"><?php echo $row->descripcion ?></td>
                                 </tr>
@@ -103,15 +102,48 @@ foreach ($this->productos as $row) {
                         </table>
                     </div>
 
-
-
                     <div class="row">
                         <div class="col">
                             <form name="form" method="POST" action="">
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Tu email" required>
-                                    <br>
                                 </div>
+
+                                <?php
+                                $query = "SELECT comentarios_campo_dinamico.nombre, comentarios_campo_dinamico.value, comentarios_campo_dinamico.type, comentarios_campo_dinamico.palabras 
+                                    FROM comentarios_campo_dinamico, productos, comentarios
+                                    WHERE comentarios_campo_dinamico.id_producto = productos.id_producto
+                                    AND comentarios_campo_dinamico.activo = 1
+                                    AND productos.id_producto = $id_producto
+                                    GROUP BY comentarios_campo_dinamico.nombre";
+
+                                $dinamic = $connect->query($query);
+
+                                ?>
+
+                                <div class="form-group">
+                                    <h5 class="text-warning">Tambien me interesa</h5>
+                                    <select name="datoDinamico">
+                                        <?php
+                                        foreach ($dinamic as $row) {
+
+                                            if (isset($row['nombre']) && isset($row['value']) && isset($row['type'])) {
+                                                $palabras = $row['palabras'];
+                                                do {
+                                                    $extracValue = explode(",", $row['value']);
+                                        ?>
+                                                    <option><?php echo $value =  $extracValue[$palabras] ?></option>
+
+                                        <?php
+                                                    $palabras--;
+                                                } while ($palabras > 0);
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+
                                 <textarea class="form-control" name="descripcion" rows="6" placeholder="Tu comentario..." required></textarea>
                                 <div class="form-group my-3">
 
@@ -143,10 +175,6 @@ foreach ($this->productos as $row) {
             </div>
         </div>
 
-
-
-
-
         <?php
 
         if (isset($_REQUEST['email']) && isset($_REQUEST['descripcion']) && isset($_REQUEST['califaicacion'])) {
@@ -157,24 +185,30 @@ foreach ($this->productos as $row) {
             $califaicacion = $_REQUEST['califaicacion'];
             $ipActual = 124; //$_SERVER['REMOTE_ADDR'];
             $estado = 0;
-
-
+            $datoDinamico = '';
 
             // if (isset($row)) {
             // echo 'Usted no puede realizar mas de un comentario por dia';
             // } 
             //else {
 
-            $sql = "INSERT INTO comentarios (id_comentario, fecha, ip, id_producto, descripcion, calificacion, email, aprobado) VALUES (NULL, '$fecha', $ipActual, '$id_producto', '$comentario', '$califaicacion', '$email', '$estado');";
+            if (isset($_REQUEST['datoDinamico'])) {
+                $datoDinamico = $_REQUEST['datoDinamico'];
+            }
+
+            $sql = "INSERT INTO comentarios (id_comentario, fecha, ip, id_producto, descripcion, seleccion_dinamica ,calificacion, email, aprobado) VALUES (NULL, '$fecha', $ipActual, '$id_producto', '$comentario', '$datoDinamico' ,'$califaicacion', '$email', '$estado');";
             $submit = $connect->exec($sql);
 
             echo '<div class="text-center my-3"> <h5>Comentario enviado, aguarda aprobacion del administrador</h5> </div>';
 
             if ($submit) {
                 echo '<div class="text-center my-3"> <h5>' . $fecha . '</h5> </div>';
-            } else {
-                echo 'Rompe';
             }
+        }
+
+
+
+        if (isset($_REQUEST[''])) {
         }
 
         ?>
@@ -212,6 +246,7 @@ foreach ($this->productos as $row) {
 							<p class='my-3'></p>
 							
 							<h5>" . $row["descripcion"] . "</h5>
+                            <h5>" . 'Usuario interesado en : ' . $row["seleccion_dinamica"] . "</h5>
 							<p class='my-3'></p>
 							
 							<h4><strong>Valoración: </strong> " . $calificacion . "</h4>
@@ -226,36 +261,9 @@ foreach ($this->productos as $row) {
                 ?>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-
-
-
-
-
-
-
-
-        </div>
-        </div>
-        </div>
-
-
-
-
-
-
-
-
-        </div>
-        </div>
 
 <?php
-
     }
 }
-
-
 include_once('views/footer.php');
 ?>

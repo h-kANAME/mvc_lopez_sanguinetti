@@ -150,6 +150,7 @@ class AgregarCamposModelo extends Model
         $name = $datos["name"];
         $value = $datos["value"];
         $campos = $datos["campos"];
+        $palabras = $datos["palabras"];
         $estado_activo = 0;
 
 
@@ -168,9 +169,11 @@ class AgregarCamposModelo extends Model
         // echo '</pre>';
 
         if ($datos) {
+                         // INSERT INTO `comentarios_campo_dinamico` (`id_comentario_campo_dinamico`, `id_producto`, `nombre`, `value`, `palabras`, `type`, `activo`)
+                        // VALUES (NULL, '18', 'Colores', ', Color Rojo, Color Verde', '2', '3', '0');
 
-            echo    $sql = "INSERT INTO comentarios_campo_dinamico (id_comentario_campo_dinamico, id_producto, nombre, value, type, estado_activo)
-                    VALUES (NULL, '$id_producto', '$name', '$value', '$c', '$estado_activo');";
+            echo    $sql = "INSERT INTO comentarios_campo_dinamico (id_comentario_campo_dinamico, id_producto, nombre, value, palabras, type, activo)
+                    VALUES (NULL, '$id_producto', '$name', '$value', '$palabras', '$c', '$estado_activo');";
 
             $con = $this->db->connect();
             $camposDinamicosAgregar = $con->exec($sql);
@@ -207,17 +210,17 @@ class AgregarCamposModelo extends Model
 
     public function activarCamposComentarios($datos)
     {
-        $id_comentarios_campo_dinamico = $datos["id_comentarios_campo_dinamico"];
-        $estado_activo = $datos["estado_activo"];
-
-        echo '<pre>';
-        var_dump($datos);
-        echo '</pre>';
-
+        $id_comentarios_campo_dinamico = $datos["id_comentario_campo_dinamico"];
+        $estado_activo = $datos["activo"];
+      
+        // echo '<pre>';
+        // var_dump($datos);
+        // echo '</pre>';
+        // die();
 
         if ($datos) {
 
-            $sql = "UPDATE comentarios_campo_dinamico SET estado_activo = '$estado_activo' WHERE comentarios_campo_dinamico.id_comentario_campo_dinamico = $id_comentarios_campo_dinamico";
+            $sql = "UPDATE comentarios_campo_dinamico SET activo = '$estado_activo' WHERE comentarios_campo_dinamico.id_comentario_campo_dinamico = $id_comentarios_campo_dinamico";
 
             $con = $this->db->connect();
             $activarCampo = $con->exec($sql);

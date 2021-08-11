@@ -264,8 +264,9 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
                             </tbody>
                         </table>
                     </div>
+                </form>
             </div>
-            </form>
+
 
         </div>
     </div>
@@ -386,7 +387,7 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
             <div class="col-md-12 text-white">
 
                 <form method="post" class="my-3 table-bordered border-primary" action='<?php echo constant('URL'); ?>agregarCampos/activarCamposComentarios'>
-                    <h3 class="card-title col mb-3 text-center">Habilitar campo dinamico Comentarios</h3>
+                    <h3 class="card-title col mb-3 text-center">Habilitar campo dinamico Productos</h3>
 
                     <div class="col mb-3">
                         <table class="table">
@@ -401,12 +402,13 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
                             <tbody>
 
                                 <?php
-                                $consulta = "SELECT comentarios_campo_dinamico.id_comentario_campo_dinamico, comentarios_campo_dinamico.value, comentarios_campo_dinamico.type, comentarios_campo_dinamico.estado_activo        
-                                             FROM comentarios_campo_dinamico, productos
-                                             WHERE productos.id_producto = comentarios_campo_dinamico.id_producto
-                                             AND productos.id_producto = $id_producto";
-
-                                $request =  $connect->query($consulta);
+                                $caracteristicas = "SELECT comentarios_campo_dinamico.id_comentario_campo_dinamico, comentarios_campo_dinamico.value, comentarios_campo_dinamico.type, comentarios_campo_dinamico.activo        
+                                                    FROM comentarios_campo_dinamico, productos
+                                                    WHERE productos.id_producto = comentarios_campo_dinamico.id_producto
+                                                    AND productos.id_producto = $id_producto";
+                                                    
+                                $request =  $connect->query($caracteristicas);
+                                //Agregar tooltip para informar que 0 = inativo y 1 = activo
                                 if ($request) {
 
                                     foreach ($request as $row) {
@@ -415,19 +417,24 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
                                         <tr class="text-center text-white">
 
                                             <th scope="row">
+
                                                 <select name="id_comentario_campo_dinamico" class="mdb-select md-form" required>
                                                     <option name="<?php echo $row['id_comentario_campo_dinamico'] ?>"><?php echo $row['id_comentario_campo_dinamico'] ?></option>
                                                 </select>
+
                                             </th>
 
                                             <td><?php echo $row['value'] ?></td>
-                                            <td><input class="text-center" type="text" value="<?php echo $row['estado_activo'] ?>" name="estado_activo"></td>
+                                            <td><input class="text-center" type="text" value="<?php echo $row['activo'] ?>" name="activo"></td>
+                                            
                                             <td><button type="submit" class="btn btn-success text-white link"><a class="activo" style="text-decoration:none; color:aliceblue;">Ok</button></td>
                                         </tr>
+
                                 <?php
                                     }
                                 }
                                 ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -447,7 +454,8 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
                                     <th scope="col">ID</th>
                                     <th scope="col">Campo</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Value</th>
+                                    <th scope="col">Values</th>
+                                    <th scope="col">Cantidad Items</th>
                                 </tr>
                             </thead>
 
@@ -475,6 +483,10 @@ if (isset($producto['estado_activo']) && $producto['estado_activo'] == 1) {
                                     </td>
                                     <td>
                                         <input name="value" type="text">
+                                    </td>
+
+                                    <td>
+                                        <input class="text-center" name="palabras" type="number">
                                     </td>
                     </div>
 
