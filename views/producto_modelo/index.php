@@ -151,11 +151,11 @@ foreach ($this->productos as $row) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <select name="califaicacion">
-                                                    <option value="★">*</option>
-                                                    <option value="★★">**</option>
-                                                    <option value="★★★">***</option>
-                                                    <option value="★★★★">****</option>
-                                                    <option value="★★★★★">*****</option>
+                                                    <option value="1">★</option>
+                                                    <option value="2">★★</option>
+                                                    <option value="3">★★★</option>
+                                                    <option value="4">★★★★</option>
+                                                    <option value="5">★★★★★</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4 mb-6">
@@ -183,6 +183,7 @@ foreach ($this->productos as $row) {
             $email = $_REQUEST['email'];
             $comentario = $_REQUEST['descripcion'];
             $califaicacion = $_REQUEST['califaicacion'];
+            // die();
             $ipActual = 124; //$_SERVER['REMOTE_ADDR'];
             $estado = 0;
             $datoDinamico = '';
