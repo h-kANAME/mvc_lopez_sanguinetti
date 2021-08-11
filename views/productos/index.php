@@ -36,14 +36,14 @@
   ?>
 
   <div class="container my-6">
-    <div class="row">
+    <div class="row my-5">
 
-      <div class="col-lg-5 mx-auto">
+      <div class="col" style="max-width: 18rem;">
         <form action="">
-          <div class="list-group lista-filtros" data-categoria=<?php echo '"' . $id_categoria . '"' ?> data-marca=<?php echo '"' . $id_marca . '"' ?>>
+          <div class="" data-categoria=<?php echo '"' . $id_categoria . '"' ?> data-marca=<?php echo '"' . $id_marca . '"' ?> data-sub_categoria=<?php echo '"' . $id_sub_categoria . '"' ?>>
 
             <?php
-            echo ' <h3 class="">  <a class="filtro-categorias mx-auto"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';           
+            echo ' <h3 class="text-center bg-warning">  <a class="filtro-categorias mx-auto"  data-id="marca"  href="' . $PAGINA_LISTADO . '?id_marca=&id_categoria=' . $id_categoria . '">Marcas</a> </h3>';
             foreach ($this->marcas as $row) {
               $marca = new Marca();
               $marca = $row;
@@ -55,8 +55,10 @@
             }
             echo '</div>';
             echo '</div>';
-            echo  '<div class="col-lg-5 mx-auto">';
-            echo ' <h3 class="mx-auto">  <a class="filtro-categorias" data-id="categoria"  href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=">Categorias</a> </h3>';
+
+            echo ' <div class="col" style="max-width: 18rem;">';
+
+            echo ' <h3 class="text-center bg-warning">  <a class="filtro-categorias" data-id="categoria"  href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=">Categorias</a> </h3>';
             foreach ($this->categorias as $row) {
               $categoria = new Categoria();
               $categoria = $row;
@@ -68,8 +70,11 @@
             }
 
 
-            
-            echo ' <h3 class=" mx-auto">  <a class="filtro-categorias"  data-id="sub_categoria"  href="' . $PAGINA_LISTADO . '?id_sub_categoria=&id_sub_categoria=' . $id_sub_categoria . '">Sub Categoria</a> </h3>';           
+            echo '</div>';
+
+            echo ' <div class="col" style="max-width: 18rem;">';
+
+            echo ' <h3 class="text-center bg-warning">  <a class="filtro-categorias"  data-id="sub_categoria"  href="' . $PAGINA_LISTADO . '?id_sub_categoria=&id_sub_categoria=' . $id_sub_categoria . '">S.Categoria</a> </h3>';
             foreach ($this->subCategorias as $row) {
               $subCategoria = new SubCategoria();
               $subCategoria = $row;
@@ -79,86 +84,92 @@
              </button>';
               echo '</a>';
             }
-
-
             ?>
+
           </div>
         </form>
 
-        <div class="mt-5">
-          <?php
 
-          echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=asc' . '"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>';
-          echo '<span style="margin-left: 10px;"></span>';
-          echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=desc' . '"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>';
-          ?>
-        </div>
 
       </div>
-      <div class="container">
-        <div class="row">
+    </div>
 
-          <?php
-          include_once "models/ProductosModelo.php";
+    <div class="container">
+      <div class="mt-5">
+        <?php
 
-          foreach ($this->productos as $row) {
+        echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=asc' . '"><img src="public/img/Logos_Banners/orderAZ.jpg" alt="rowOrder" width="50" height="50"></a>';
+        echo '<span style="margin-left: 10px;"></span>';
+        echo '<a href="' . $PAGINA_LISTADO . '?id_marca=' . $id_marca . '&id_categoria=' . $id_categoria .  '&ordenBy=desc' . '"><img src="public/img/Logos_Banners/orderZA.jpg" alt="rowOrder" width="50" height="50"></a>';
+        ?>
+      </div>
+    </div>
 
-            $producto = new Productos();
-            $producto = $row;
-            if (($producto->id_marca == $id_marca || $id_marca == '')
-              && ($producto->id_categoria == $id_categoria || $id_categoria == '')
-            ) {
+    <div class="container">
+      <div class="row">
 
-              
-              if ($producto->rank > 0) {
-                $rank = '';
+        <?php
+        include_once "models/ProductosModelo.php";
+
+        foreach ($this->productos as $row) {
+
+          $producto = new Productos();
+          $producto = $row;
+          if (($producto->id_marca == $id_marca || $id_marca == '')
+            && ($producto->id_categoria == $id_categoria || $id_categoria == '')
+          ) {
+
+
+            if ($producto->rank > 0) {
+              $rank = '';
             }
             if ($producto->rank > 0) {
-                $rank = '★';
-            } if ($producto->rank > 1) {
-                $rank = '★★';
-            } if ($producto->rank > 2) {
-                $rank = '★★★';
-            } if ($producto->rank > 3) {
-                $rank = '★★★★';
-            } if ($producto->rank > 4) {
-                $rank = '★★★★★';
+              $rank = '★';
+            }
+            if ($producto->rank > 1) {
+              $rank = '★★';
+            }
+            if ($producto->rank > 2) {
+              $rank = '★★★';
+            }
+            if ($producto->rank > 3) {
+              $rank = '★★★★';
+            }
+            if ($producto->rank > 4) {
+              $rank = '★★★★★';
             }
 
-               
 
-              echo '<div class="col-md-4 card-body">';
-              echo '<div class="card" style="width: 20rem;">';
-              echo '<div class="card text-center">';
 
-              echo '<img src="' . $producto->imagen . '" class="card-img-top img-fluid"  alt="' . $producto->modelo . '">';
-              echo '<div class="card-body">';
-              echo '<h5 class="card-title">' . $producto->modelo . '</h5>';
+            echo '<div class="col-md-4 card-body">';
+            echo '<div class="card" style="width: 20rem;">';
+            echo '<div class="card text-center">';
 
-              echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
+            echo '<img src="' . $producto->imagen . '" class="card-img-top img-fluid"  alt="' . $producto->modelo . '">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $producto->modelo . '</h5>';
 
-              echo '<h6 class="card-text">' . 'Valoracion: ' . $rank . '</h6>';
+            echo '<h6 class="card-text">' . '$' . $producto->precio . '</h6>';
 
-              echo '</div>'; //Cry
+            echo '<h6 class="card-text">' . 'Valoracion: ' . $rank . '</h6>';
 
-              echo '<div class="btn-group">';
-              echo '<a href="producto_modelo?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
+            echo '</div>'; //Cry
 
-              echo '</div>'; // Card body
-              echo '</div>'; // Style width 20
+            echo '<div class="btn-group">';
+            echo '<a href="producto_modelo?id_producto=' . $producto->id_producto . '" class="btn btn-dark">Detalles</a>';
 
-              echo '</div>';
-              echo '</div>';
-              
-            } 
-             
-          
+            echo '</div>'; // Card body
+            echo '</div>'; // Style width 20
+
+            echo '</div>';
+            echo '</div>';
+          }
         }
-           
-          ?>
 
-        </div>
+        ?>
+
       </div>
+    </div>
 </body>
 </div>
 

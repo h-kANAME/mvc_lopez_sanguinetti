@@ -33,6 +33,7 @@ class ProductosModelo extends Model
                        FROM productos, comentarios, marcas, categorias
                        WHERE productos.id_producto = comentarios.id_producto
                        AND productos.estado_activo = 1
+                       AND comentarios.aprobado = 1
                        AND productos.id_marca = marcas.id_marca
                        AND productos.id_categoria = categorias.id_categoria
                        AND marcas.estado_activo = 1
@@ -191,6 +192,7 @@ class ProductosModelo extends Model
                  FROM productos, comentarios
                  WHERE productos.id_producto = comentarios.id_producto
                  AND productos.estado_activo = 1
+                 AND comentarios.aprobado = 1
                  GROUP BY productos.modelo";
                  
       $con    = $this->db->connect();
